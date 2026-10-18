@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Meet the members of SBI48 — Super Boy Indonesia 48.">
+  <title>MEMBERS — SBI48 Official Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="members.css">
+  <script src="members.js" defer></script>
+</head>
+
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div id="sparkleLayer" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="header" id="top">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="siteNav" aria-label="Buka navigasi">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="siteNav" aria-label="Navigasi utama">
+      <a class="nav-link" href="home.html">HOME</a>
+      <a class="nav-link is-active" href="members.html">MEMBERS</a>
+      <a class="nav-link" href="history.html">HISTORY</a>
+      <a class="nav-link" href="schedule.html">SCHEDULE</a>
+      <a class="nav-link" href="diskografi.html">DISCOGRAPHY</a>
+      <a class="nav-link" href="teater.html">THEATER</a>
+      <a class="nav-cta" href="fanclub.html">FANCLUB <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="members-hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+
+      <div class="hero-content reveal">
+        <div class="slide-tag"><span>01</span> / THE PEOPLE</div>
+        <h1>MEET THE<br><span class="gradient-text">MEMBERS</span></h1>
+        <p class="hero-lead">Kenali wajah-wajah di balik panggung SBI48. Setiap member membawa mimpi, warna, dan cerita uniknya sendiri.</p>
+      </div>
+    </section>
+
+    <!-- FILTER & CONTROLS SECTION -->
+    <section class="members-section section-wrap">
+      <!-- TEAM FILTER BUTTONS -->
+      <div class="filter-row reveal" role="group" aria-label="Filter kategori member">
+        <button class="filter-button is-selected" data-filter="ALL">ALL MEMBERS</button>
+        <button class="filter-button" data-filter="SIII">TEAM SIII</button>
+        <button class="filter-button" data-filter="BIV">TEAM BIV</button>
+        <button class="filter-button" data-filter="I">TEAM I</button>
+        <button class="filter-button" data-filter="GEN7">TRAINEE</button>
+      </div>
+
+      <!-- NEW: GENERATION + SEARCH CONTROLS -->
+      <div class="controls-row reveal">
+        <div class="select-wrapper">
+          <label for="genFilter">GENERASI</label>
+          <div class="select-shell">
+            <select id="genFilter" aria-label="Filter generasi">
+              <option value="all">ALL GENERATIONS</option>
+              <option value="1">GENERATION 1</option>
+              <option value="2">GENERATION 2</option>
+              <option value="3">GENERATION 3</option>
+              <option value="4">GENERATION 4</option>
+              <option value="5">GENERATION 5</option>
+              <option value="6">GENERATION 6</option>
+              <option value="7">GENERATION 7</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="select-wrapper search-wrapper">
+          <label for="memberSearch">CARI MEMBER</label>
+          <div class="select-shell">
+            <select id="memberSearch" aria-label="Cari member">
+              <option value="">— PILIH MEMBER —</option>
+            </select>
+            <span class="select-arrow">🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="member-count reveal">
+        Menampilkan <span id="countDisplay" class="highlight-text">0</span> member
+        <span id="filterInfo" class="filter-info"></span>
+      </div>
+
+      <div class="member-grid" id="memberGrid">
+        <!-- Member cards will be injected here by JS -->
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">🔍</div>
+        <h3>Tidak ada member yang cocok</h3>
+        <p>Coba kombinasi filter yang berbeda.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- MEMBER DETAIL MODAL -->
+  <div class="modal-overlay" id="memberModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Tutup detail member">✕</button>
+
+      <div class="modal-body">
+        <div class="modal-visual">
+          <div class="modal-image-wrapper" id="modalImageWrapper"></div>
+          <div class="modal-team-badge" id="modalTeamBadge">TEAM</div>
+        </div>
+
+        <div class="modal-info">
+          <div class="modal-header">
+            <h2 id="modalName">Member Name</h2>
+            <span class="modal-gen" id="modalGen">Generation X</span>
+          </div>
+
+          <!-- NEW: JIKOSHOUKAI SECTION -->
+          <div class="jiko-box">
+            <div class="jiko-label">✦ JIKOSHOUKAI ✦</div>
+            <p class="jiko-text" id="modalJiko">"..."</p>
+          </div>
+
+          <div class="modal-stats">
+            <div class="stat-item">
+              <span class="stat-label">DOB</span>
+              <span class="stat-value" id="modalDob">01 Jan 2000</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">MBTI</span>
+              <span class="stat-value highlight-cyan" id="modalMbti">ENFP</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Height</span>
+              <span class="stat-value" id="modalHeight">170 cm</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Blood</span>
+              <span class="stat-value" id="modalBlood">A</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Horoscope</span>
+              <span class="stat-value" id="modalHoroscope">Aries</span>
+            </div>
+          </div>
+
+          <div class="modal-socials">
+            <a href="#" target="_blank" rel="noopener" class="social-link" id="modalIg">
+              <span class="social-icon">📷</span> <span id="modalIgHandle">@handle</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener" class="social-link" id="modalX">
+              <span class="social-icon">𝕏</span> <span id="modalXHandle">@handle</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW: MODAL NAVIGATION -->
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="modalPrev" aria-label="Member sebelumnya">
+          <span class="nav-arrow">←</span>
+          <span class="nav-text">
+            <small>PREVIOUS</small>
+            <span id="prevName">—</span>
+          </span>
+        </button>
+
+        <div class="modal-counter">
+          <span id="modalCounterCurrent">1</span>
+          <span>/</span>
+          <span id="modalCounterTotal">1</span>
+        </div>
+
+        <button class="modal-nav-btn" id="modalNext" aria-label="Member berikutnya">
+          <span class="nav-text">
+            <small>NEXT</small>
+            <span id="nextName">—</span>
+          </span>
+          <span class="nav-arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+    <p class="footer-tagline">THE IDOLS YOU CAN MEET.</p>
+    <div class="footer-nav">
+      <a href="members.html">MEMBERS</a>
+      <a href="history.html">HISTORY</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="diskografi.html">DISCOGRAPHY</a>
+      <a href="teater.html">THEATER</a>
+      <a href="fanclub.html">FANCLUB</a>
+    </div>
+    <small>&copy; <span id="year"></span> SBI48 &middot; NEXTERA STUDIOS. All Rights Reserved.</small>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑</button>
+</body>
+</html>

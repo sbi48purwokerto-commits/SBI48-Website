@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Diskografi SBI48 — Single, Album, dan rilisan resmi.">
+  <title>DISCOGRAPHY — SBI48 Official Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="diskografi.css">
+  <script src="diskografi.js" defer></script>
+</head>
+
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div id="sparkleLayer" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="header" id="top">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="siteNav" aria-label="Buka navigasi">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="siteNav" aria-label="Navigasi utama">
+      <a class="nav-link" href="home.html">HOME</a>
+      <a class="nav-link" href="members.html">MEMBERS</a>
+      <a class="nav-link" href="history.html">HISTORY</a>
+      <a class="nav-link" href="schedule.html">SCHEDULE</a>
+      <a class="nav-link is-active" href="diskografi.html">DISCOGRAPHY</a>
+      <a class="nav-link" href="teater.html">THEATER</a>
+      <a class="nav-cta" href="fanclub.html">FANCLUB <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="disko-hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+
+      <div class="hero-content reveal">
+        <div class="slide-tag"><span>04</span> / THE SOUND</div>
+        <h1>EXPLORE THE<br><span class="gradient-text">DISCOGRAPHY</span></h1>
+        <p class="hero-lead">Perjalanan musik SBI48 dari awal hingga kini. Setiap nada adalah cerita, setiap lirik adalah janji.</p>
+      </div>
+      
+      <!-- Decorative Music Elements -->
+      <div class="music-deco deco-1">♪</div>
+      <div class="music-deco deco-2">♫</div>
+      <div class="music-deco deco-3">✦</div>
+    </section>
+
+    <!-- FILTER & GRID SECTION -->
+    <section class="disko-section section-wrap">
+      <div class="filter-row reveal" role="group" aria-label="Filter kategori rilisan">
+        <button class="filter-button is-selected" data-filter="ALL">ALL RELEASES</button>
+        <button class="filter-button" data-filter="SINGLE">SINGLE</button>
+        <button class="filter-button" data-filter="ALBUM">ALBUM</button>
+        <button class="filter-button" data-filter="SPECIAL">SPECIAL</button>
+        <button class="filter-button" data-filter="DIGITAL">DIGITAL</button>
+      </div>
+
+      <div class="release-count reveal">
+        Menampilkan <span id="countDisplay" class="highlight-text">0</span> rilisan
+      </div>
+
+      <div class="disko-grid" id="diskoGrid">
+        <!-- Release cards will be injected here by JS -->
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">💿</div>
+        <h3>Tidak ada rilisan di kategori ini</h3>
+        <p>Coba pilih kategori filter yang berbeda.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- RELEASE DETAIL MODAL -->
+  <div class="modal-overlay" id="discoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Tutup detail rilisan">✕</button>
+
+      <div class="modal-body">
+        <div class="modal-visual">
+          <div class="modal-cover-wrapper" id="modalCoverWrapper">
+            <!-- Cover image or fallback injected here -->
+          </div>
+          <div class="modal-type-badge" id="modalTypeBadge">SINGLE</div>
+        </div>
+
+        <div class="modal-info">
+          <div class="modal-header">
+            <h2 id="modalTitle">Release Title</h2>
+            <span class="modal-date" id="modalDate">01 Januari 2020</span>
+          </div>
+
+          <div class="tracklist-container">
+            <h3 class="tracklist-title">DAFTAR LAGU</h3>
+            <ul class="tracklist" id="modalTracklist">
+              <!-- Tracks injected here -->
+            </ul>
+          </div>
+
+          <div class="modal-note">
+            <p>✦ <em>Center (C)</em> ditandai dengan mahkota 👑 dan highlight khusus.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL NAVIGATION -->
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="modalPrev" aria-label="Rilisan sebelumnya">
+          <span class="nav-arrow">←</span>
+          <span class="nav-text">
+            <small>PREVIOUS</small>
+            <span id="prevTitle">—</span>
+          </span>
+        </button>
+
+        <div class="modal-counter">
+          <span id="modalCounterCurrent">1</span>
+          <span>/</span>
+          <span id="modalCounterTotal">1</span>
+        </div>
+
+        <button class="modal-nav-btn" id="modalNext" aria-label="Rilisan berikutnya">
+          <span class="nav-text">
+            <small>NEXT</small>
+            <span id="nextTitle">—</span>
+          </span>
+          <span class="nav-arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+    <p class="footer-tagline">THE IDOLS YOU CAN MEET.</p>
+    <div class="footer-nav">
+      <a href="members.html">MEMBERS</a>
+      <a href="history.html">HISTORY</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="diskografi.html">DISCOGRAPHY</a>
+      <a href="teater.html">THEATER</a>
+      <a href="fanclub.html">FANCLUB</a>
+    </div>
+    <small>&copy; <span id="year"></span> SBI48 &middot; NEXTERA STUDIOS. All Rights Reserved.</small>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑</button>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="SBI48 — Super Boy Indonesia 48. The idols you can meet.">
+  <title>SBI48 — Official Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="home.css">
+  <script src="home.js" defer></script>
+</head>
+
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div id="sparkleLayer" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="header" id="top">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="siteNav" aria-label="Buka navigasi">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="siteNav" aria-label="Navigasi utama">
+      <a class="nav-link is-active" href="home.html">HOME</a>
+      <a class="nav-link" href="members.html">MEMBERS</a>
+      <a class="nav-link" href="history.html">HISTORY</a>
+      <a class="nav-link" href="schedule.html">SCHEDULE</a>
+      <a class="nav-link" href="diskografi.html">DISCOGRAPHY</a>
+      <a class="nav-link" href="teater.html">THEATER</a>
+      <a class="nav-cta" href="fanclub.html">FANCLUB <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+
+      <div class="hero-topline">
+        <span><i class="status-dot"></i> THE IDOLS YOU CAN MEET</span>
+        <span>INDONESIA · EST. 2018</span>
+      </div>
+
+      <div class="hero-copy">
+        <div class="slide-tag" id="slideTag"><span>01</span> / INTRODUCING SBI48</div>
+        <h1 id="heroTitle">ONE GROUP.<br><span class="outline-text">NEW HISTORY.</span></h1>
+        <p class="hero-lead" id="heroLead">Super Boy Indonesia 48 — Overseas Male Group dari AKB48 Group. Berawal dari Purwokerto, melangkah menuju panggung yang lebih luas.</p>
+        
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="members.html">MEET THE MEMBERS <span>↗</span></a>
+          <a class="btn btn-outline" href="history.html">OUR STORY <span>→</span></a>
+        </div>
+
+        <div class="hero-proof">
+          <span class="proof-line"></span>
+          <span>BASED IN PURWOKERTO, INDONESIA</span>
+        </div>
+      </div>
+
+      <!-- HERO GRAPHIC -->
+      <div class="hero-stage" id="heroStage" aria-label="Grafis identitas SBI48">
+        <div class="stage-orbit orbit-1"></div>
+        <div class="stage-orbit orbit-2"></div>
+        <div class="stage-orbit orbit-3"></div>
+        <div class="stage-cross cross-1">✳</div>
+        <div class="stage-cross cross-2">✦</div>
+        <div class="stage-ghost">48</div>
+
+        <div class="stage-card" id="stageCard">
+          <div class="stage-card-top"><span>SBI48 / OFFICIAL</span><span>48° 12′</span></div>
+          <div class="stage-emblem">
+            <span class="emblem-sbi">SBI</span>
+            <span class="emblem-48">48</span>
+            <span class="emblem-line"></span>
+            <span class="emblem-caption">SUPER BOY<br>INDONESIA</span>
+          </div>
+          <div class="stage-card-bottom"><span>THE NEXT GENERATION</span><span>2018—∞</span></div>
+        </div>
+
+        <div class="floating-chip chip-top"><span class="chip-dot"></span> IDOLS YOU CAN MEET</div>
+        <div class="floating-chip chip-bottom"><span class="chip-icon">✦</span> FROM BANYUMAS, WITH PRIDE</div>
+        <div class="stage-index" id="stageIndex">01 <span>—</span> 03</div>
+      </div>
+
+      <!-- SLIDER CONTROLS -->
+      <div class="hero-controls">
+        <div class="hero-scroll">
+          <span class="scroll-mouse"><i></i></span>
+          <span>SCROLL TO DISCOVER</span>
+        </div>
+        <div class="slide-controls">
+          <button class="slide-arrow" id="prevSlide" aria-label="Slide sebelumnya">←</button>
+          <div class="slide-dots" role="group" aria-label="Pilih slide">
+            <button class="slide-dot is-active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="slide-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button class="slide-dot" data-slide="2" aria-label="Slide 3"></button>
+          </div>
+          <button class="slide-arrow" id="nextSlide" aria-label="Slide berikutnya">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOVING TICKER -->
+    <div class="ticker" aria-label="SBI48 tagline">
+      <div class="ticker-track">
+        <span>SUPER BOY INDONESIA 48</span><b>✳</b>
+        <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
+        <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
+        <span>SUPER BOY INDONESIA 48</span><b>✳</b>
+        <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
+        <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
+      </div>
+    </div>
+
+    <!-- ABOUT SBI48 -->
+    <section class="about section-wrap" id="about">
+      <div class="section-label reveal"><span>01</span><i></i> THE SBI48 STORY</div>
+      <div class="about-grid">
+        <div class="about-title reveal">
+          <p class="micro-label">A DIFFERENT KIND OF IDOL CULTURE</p>
+          <h2>MORE THAN<br><span class="gradient-text">AN IDOL GROUP.</span></h2>
+        </div>
+        <div class="about-copy reveal">
+          <p class="about-lead">Sebuah cerita baru dalam keluarga besar 48 Group.</p>
+          <p>SBI48 membawa semangat <em>“Idols you can meet”</em> dengan identitas Indonesia, energi panggung yang khas, dan hubungan dekat antara member dengan fans.</p>
+          <a class="under-link" href="history.html">GET TO KNOW OUR HISTORY <span>↗</span></a>
+        </div>
+      </div>
+      <div class="fact-strip reveal">
+        <div class="fact"><span class="fact-number" data-count="2018">2018</span><span class="fact-caption">THE STORY BEGINS</span></div>
+        <div class="fact"><span class="fact-number fact-location">PURWOKERTO</span><span class="fact-caption">OUR HOMETOWN</span></div>
+        <div class="fact"><span class="fact-number">ONE <em>48</em></span><span class="fact-caption">ONE COMMUNITY</span></div>
+      </div>
+    </section>
+
+    <!-- 48G SISTER GROUPS UNIVERSE -->
+    <section class="sister-groups section-wrap">
+      <div class="section-label reveal"><span>02</span><i></i> THE 48G UNIVERSE</div>
+      <div class="sister-header reveal">
+        <h2>CONNECTED<br><span class="gradient-text">BY DREAMS.</span></h2>
+        <p>SBI48 adalah bagian dari keluarga besar AKB48 Group global. Jelajahi saudara-saudara kami di seluruh dunia.</p>
+      </div>
+      
+      <div class="sister-grid reveal">
+        <a href="https://www.akb48.co.jp/" target="_blank" rel="noopener" class="sister-pill">AKB48</a>
+        <a href="https://www.ske48.co.jp/" target="_blank" rel="noopener" class="sister-pill">SKE48</a>
+        <a href="https://www.nmb48.com/" target="_blank" rel="noopener" class="sister-pill">NMB48</a>
+        <a href="https://www.hkt48.jp/" target="_blank" rel="noopener" class="sister-pill">HKT48</a>
+        <a href="https://www.ngt48.jp/" target="_blank" rel="noopener" class="sister-pill">NGT48</a>
+        <a href="https://www.stu48.com/" target="_blank" rel="noopener" class="sister-pill">STU48</a>
+        <a href="https://www.jkt48.com/" target="_blank" rel="noopener" class="sister-pill">JKT48</a>
+        <a href="https://www.bnk48.com/" target="_blank" rel="noopener" class="sister-pill">BNK48</a>
+        <a href="https://www.tpe48.com/" target="_blank" rel="noopener" class="sister-pill">TPE48</a>
+        <a href="https://www.mnl48.com/" target="_blank" rel="noopener" class="sister-pill">MNL48</a>
+        <a href="https://www.tsh48.com/" target="_blank" rel="noopener" class="sister-pill">TSH48</a>
+        <a href="https://www.cgm48.com/" target="_blank" rel="noopener" class="sister-pill">CGM48</a>
+        <a href="https://klp48.my/" target="_blank" rel="noopener" class="sister-pill">KLP48</a>
+      </div>
+    </section>
+
+    <!-- LATEST UPDATES -->
+    <section class="updates section-wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-label"><span>03</span><i></i> FROM SBI48</div>
+          <h2>THE LATEST<br><span class="outline-text">UPDATES.</span></h2>
+        </div>
+        <a class="under-link" href="schedule.html">ALL NEWS <span>↗</span></a>
+      </div>
+
+      <div class="filter-row reveal" role="group" aria-label="Filter kategori berita">
+        <button class="filter-button is-selected" data-filter="all">ALL</button>
+        <button class="filter-button" data-filter="news">NEWS</button>
+        <button class="filter-button" data-filter="event">EVENT</button>
+        <button class="filter-button" data-filter="music">MUSIC</button>
+      </div>
+
+      <div class="news-grid">
+        <a class="news-card news-card-large reveal" href="news.html" data-category="news">
+          <div class="news-art art-violet">
+            <span class="art-top">SBI48 / GROUP NEWS</span>
+            <div class="art-typography">NEW<br><span>CHAPTER.</span></div>
+            <div class="art-sphere"></div>
+            <span class="art-bottom">THE STORY CONTINUES</span>
+          </div>
+          <div class="card-info">
+            <div class="card-meta"><span>GROUP NEWS</span><span>01 / 03</span></div>
+            <h3>Era baru SBI48. Cerita berikutnya dimulai di sini.</h3>
+            <span class="card-link">READ MORE ↗</span>
+          </div>
+        </a>
+
+        <a class="news-card reveal" href="teater.html" data-category="event">
+          <div class="news-art art-cyan">
+            <span class="art-top">SBI48 / LIVE</span>
+            <div class="art-typography compact">MEET<br><span>US!</span></div>
+            <div class="art-stripes"></div>
+            <span class="art-bottom">SEE YOU AT THE THEATER</span>
+          </div>
+          <div class="card-info">
+            <div class="card-meta"><span>EVENT & SCHEDULE</span><span>02 / 03</span></div>
+            <h3>Temukan jadwal pertunjukan dan event SBI48.</h3>
+            <span class="card-link">VIEW SCHEDULE ↗</span>
+          </div>
+        </a>
+
+        <a class="news-card reveal" href="diskografi.html" data-category="music">
+          <div class="news-art art-rose">
+            <span class="art-top">SBI48 / MUSIC</span>
+            <div class="art-typography compact">SOUND<br><span>OF 48.</span></div>
+            <div class="art-record"></div>
+            <span class="art-bottom">MUSIC THAT CONNECTS US</span>
+          </div>
+          <div class="card-info">
+            <div class="card-meta"><span>MUSIC & RELEASE</span><span>03 / 03</span></div>
+            <h3>Jelajahi single, album, dan rilisan SBI48.</h3>
+            <span class="card-link">EXPLORE MUSIC ↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MEMBER FEATURE -->
+    <section class="member-feature">
+      <div class="member-feature-pattern"></div>
+      <div class="member-feature-inner section-wrap">
+        <div class="section-label reveal"><span>04</span><i></i> THE PEOPLE BEHIND THE STORY</div>
+        <div class="member-feature-grid">
+          <div class="member-feature-copy reveal">
+            <p class="micro-label">MEET THE BOYS</p>
+            <h2>EVERY MEMBER.<br><span class="outline-text">ONE STORY.</span></h2>
+            <p>Setiap member membawa warna, mimpi, dan cerita yang berbeda. Kenali mereka lebih dekat.</p>
+            <a class="btn btn-white" href="members.html">MEET OUR MEMBERS <span>↗</span></a>
+          </div>
+          <div class="member-graphic reveal" aria-hidden="true">
+            <span class="member-giant">48</span>
+            <span class="member-star">✳</span>
+            <span class="member-circle-text">SUPER BOY INDONESIA · SUPER BOY INDONESIA ·</span>
+            <span class="member-monogram">SBI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FANCLUB CALLOUT -->
+    <section class="fan-callout">
+      <div class="callout-glow"></div>
+      <div class="callout-watermark">SBI48</div>
+      <p class="micro-label reveal">YOU ARE PART OF THE STORY</p>
+      <h2 class="reveal">LET'S MEET<br><span class="outline-text">AT THE THEATER.</span></h2>
+      <p class="reveal">Panggung ini terasa lengkap karena ada kamu.</p>
+      <a class="btn btn-primary reveal" href="fanclub.html">JOIN THE FANCLUB <span>↗</span></a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+    <p class="footer-tagline">THE IDOLS YOU CAN MEET.</p>
+    <div class="footer-nav">
+      <a href="members.html">MEMBERS</a>
+      <a href="history.html">HISTORY</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="diskografi.html">DISCOGRAPHY</a>
+      <a href="teater.html">THEATER</a>
+      <a href="fanclub.html">FANCLUB</a>
+    </div>
+    <small>&copy; <span id="year"></span> SBI48 &middot; NEXTERA STUDIOS. All Rights Reserved.</small>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑</button>
+</body>
+</html>

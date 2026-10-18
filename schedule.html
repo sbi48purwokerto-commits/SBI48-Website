@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SBI48 Schedule — Jadwal Show & Event">
+  <title>SBI48 — Schedule</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="schedule.css">
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="home.html" class="sidebar-brand">
+        <span class="brand-mark">SBI</span><span class="brand-number">48</span>
+      </a>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Tutup menu">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="home.html" class="sidebar-link"><span class="link-icon">🏠</span> Beranda</a>
+      <a href="members.html" class="sidebar-link"><span class="link-icon">👥</span> Members</a>
+      <a href="schedule.html" class="sidebar-link active"><span class="link-icon">📅</span> Jadwal</a>
+      <a href="theater.html" class="sidebar-link"><span class="link-icon">🎭</span> Theater</a>
+      <a href="discography.html" class="sidebar-link"><span class="link-icon">🎵</span> Diskografi</a>
+      <a href="news.html" class="sidebar-link"><span class="link-icon"></span> Berita</a>
+      <a href="about.html" class="sidebar-link"><span class="link-icon">ℹ️</span> Tentang</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="fanclub.html" class="fanclub-btn">JOIN FANCLUB</a>
+      <div class="sidebar-socials">
+        <a href="#" class="social-icon">📷</a>
+        <a href="#" class="social-icon">🐦</a>
+        <a href="#" class="social-icon">▶️</a>
+        <a href="#" class="social-icon">🎵</a>
+      </div>
+      <p class="sidebar-copy">© 2026 SBI48 Official</p>
+    </div>
+  </aside>
+
+  <!-- ===== TOPBAR ===== -->
+  <header class="topbar">
+    <button class="menu-btn" id="menu-btn" aria-label="Buka menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <a href="home.html" class="topbar-brand">
+      <span class="brand-mark">SBI</span><span class="brand-number">48</span>
+    </a>
+    <div class="topbar-actions">
+      <button class="lang-btn">ID</button>
+      <a href="fanclub.html" class="topbar-fanclub">FANCLUB</a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero-bg"></div>
+      <div class="page-hero-content" data-animate="fade-up">
+        <a href="home.html" class="back-link">← Kembali ke Beranda</a>
+        <p class="eyebrow">SCHEDULE</p>
+        <h1>JADWAL SHOW & EVENT</h1>
+        <p class="page-hero-sub">Temukan pertunjukan favoritmu. Dari Purwokerto ke seluruh Indonesia.</p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <section class="filter-bar" data-animate="fade-up">
+      <div class="filter-container">
+        <div class="filter-group">
+          <label class="filter-label">TAHUN</label>
+          <select id="year-filter" class="filter-select">
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">BULAN</label>
+          <select id="month-filter" class="filter-select">
+            <option value="0">Januari</option>
+            <option value="1">Februari</option>
+            <option value="2">Maret</option>
+            <option value="3">April</option>
+            <option value="4">Mei</option>
+            <option value="5">Juni</option>
+            <option value="6">Juli</option>
+            <option value="7">Agustus</option>
+            <option value="8" selected>September</option>
+            <option value="9">Oktober</option>
+            <option value="10">November</option>
+            <option value="11">Desember</option>
+          </select>
+        </div>
+        <div class="filter-group category-group">
+          <label class="filter-label">KATEGORI</label>
+          <div class="category-tabs" id="category-tabs">
+            <button class="cat-tab active" data-cat="all">ALL</button>
+            <button class="cat-tab" data-cat="show">SHOW</button>
+            <button class="cat-tab" data-cat="event">EVENT</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE TIMELINE -->
+    <section class="schedule-section">
+      <div id="schedule-container" class="schedule-container"></div>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-icon"></div>
+        <h3>Tidak ada jadwal</h3>
+        <p>Coba ubah filter bulan atau kategori.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SHOW DETAIL MODAL ===== -->
+  <div id="show-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card show-modal-card">
+      <button class="modal-close" data-close aria-label="Tutup modal">×</button>
+      
+      <div class="show-modal-header" id="show-modal-header">
+        <span class="show-modal-category" id="modal-category"></span>
+        <h2 id="modal-title"></h2>
+        <p class="show-modal-meta">
+          <span id="modal-date"></span>
+          <span class="meta-dot">•</span>
+          <span id="modal-time"></span>
+          <span class="meta-dot">•</span>
+          <span id="modal-venue"></span>
+        </p>
+        <p class="show-modal-desc" id="modal-desc"></p>
+      </div>
+
+      <div class="show-modal-body">
+        <div class="lineup-header">
+          <h3>LINE-UP <span class="lineup-count" id="lineup-count">16 MEMBER</span></h3>
+          <p class="lineup-note">Klik nama member untuk melihat profil</p>
+        </div>
+        <div id="lineup-grid" class="lineup-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand-col">
+        <div class="footer-logo">
+          <span class="brand-mark">SBI</span><span class="brand-number">48</span>
+        </div>
+        <p class="footer-tagline">Super Boy Indonesia 48<br>The One and Only Male Overseas 48 Group</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>NAVIGASI</h4>
+        <a href="home.html">Beranda</a>
+        <a href="members.html">Members</a>
+        <a href="schedule.html">Jadwal</a>
+        <a href="theater.html">Theater</a>
+        <a href="discography.html">Diskografi</a>
+        <a href="about.html">Tentang</a>
+      </div>
+      <div class="footer-social-col">
+        <h4>IKUTI KAMI</h4>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">X / Twitter</a>
+          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SBI48 OFFICIAL WEBSITE</span>
+      <span>MADE FOR THE IDOLS YOU CAN MEET.</span>
+    </div>
+  </footer>
+
+  <script src="schedule.js"></script>
+</body>
+</html>

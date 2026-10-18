@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="SBI48 — Super Boy Indonesia 48. The idols you can meet.">
+  <title>SBI48 — Welcome</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div id="sparkleLayer" aria-hidden="true"></div>
+
+  <!-- BACKGROUND DECORATIONS -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-3" aria-hidden="true"></div>
+
+  <!-- ORBIT RINGS -->
+  <div class="orbit-ring orbit-1" aria-hidden="true"></div>
+  <div class="orbit-ring orbit-2" aria-hidden="true"></div>
+  <div class="orbit-ring orbit-3" aria-hidden="true"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="splash-main">
+    <!-- TOP TAG -->
+    <div class="top-tag reveal-delay-1">
+      <span class="status-dot"></span>
+      <span>OFFICIAL WEBSITE · EST. 2018</span>
+    </div>
+
+    <!-- LOGO CONTAINER -->
+    <div class="logo-stage" id="logoStage">
+      <div class="logo-glow" aria-hidden="true"></div>
+      <div class="logo-rotate-wrapper" id="logoRotate">
+        <img
+          src="logosbi.png"
+          alt="SBI48 Logo"
+          class="splash-logo"
+          id="splashLogo"
+          onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
+        >
+        <div class="logo-fallback" id="logoFallback" style="display: none;">
+          <span class="fallback-sbi">SBI</span>
+          <span class="fallback-48">48</span>
+        </div>
+      </div>
+      <div class="logo-shadow" aria-hidden="true"></div>
+    </div>
+
+    <!-- TAGLINE -->
+    <div class="tagline-block">
+      <div class="tagline-micro reveal-delay-2">
+        <span>✦</span>
+        <span>SUPER BOY INDONESIA 48</span>
+        <span>✦</span>
+      </div>
+
+      <h1 class="tagline-title reveal-delay-3">
+        THE IDOLS<br>
+        <span class="outline-text">YOU CAN MEET.</span>
+      </h1>
+
+      <p class="tagline-sub reveal-delay-4">
+        Dari Purwokerto, untuk dunia. Selamat datang di rumah SBI48.
+      </p>
+    </div>
+
+    <!-- ENTER BUTTON -->
+    <div class="enter-block reveal-delay-5">
+      <a href="home.html" class="enter-button" id="enterButton">
+        <span class="enter-label">ENTER THE UNIVERSE</span>
+        <span class="enter-arrow">↗</span>
+        <span class="enter-shine"></span>
+      </a>
+
+      <div class="enter-hint">
+        <span class="hint-line"></span>
+        <span>SCROLL OR CLICK TO BEGIN</span>
+        <span class="hint-line"></span>
+      </div>
+    </div>
+  </main>
+
+  <!-- BOTTOM TICKER -->
+  <div class="bottom-ticker reveal-delay-6" aria-hidden="true">
+    <div class="ticker-track">
+      <span>SBI48</span><b>✦</b>
+      <span>THE IDOLS YOU CAN MEET</span><b>✦</b>
+      <span>PURWOKERTO · INDONESIA</span><b>✦</b>
+      <span>SUPER BOY INDONESIA 48</span><b>✦</b>
+      <span>SBI48</span><b>✦</b>
+      <span>THE IDOLS YOU CAN MEET</span><b>✦</b>
+      <span>PURWOKERTO · INDONESIA</span><b>✦</b>
+      <span>SUPER BOY INDONESIA 48</span><b>✦</b>
+    </div>
+  </div>
+
+  <!-- FOOTER MINI -->
+  <footer class="splash-footer reveal-delay-6">
+    <small>&copy; <span id="year"></span> SBI48 &middot; NEXTERA STUDIOS</small>
+  </footer>
+
+  <!-- EXIT OVERLAY (untuk animasi keluar saat klik Enter) -->
+  <div class="exit-overlay" id="exitOverlay" aria-hidden="true"></div>
+</body>
+</html>
