@@ -1,5 +1,6 @@
 /* ========================================
-   SBI48 — INTERACTIVE EXPERIENCE
+   SBI48 — HOME INTERACTIVE EXPERIENCE
+   Terkoneksi dengan index.html
 ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,6 +11,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const finePointer = window.matchMedia("(pointer: fine)").matches;
   const isMobile = window.matchMedia("(max-width: 850px)").matches;
   const random = (min, max) => Math.random() * (max - min) + min;
+
+  // ========================================
+  // 0. PAGE ENTRANCE (dari index.html)
+  // ========================================
+  const entranceOverlay = $("#entranceOverlay");
+  const cameFromSplash = sessionStorage.getItem("sbi48_splash_seen") === "true";
+  const isFirstVisit = !sessionStorage.getItem("sbi48_home_visited");
+
+  if (cameFromSplash && isFirstVisit && entranceOverlay && !reduceMotion) {
+    // Trigger animasi entrance - fade out setelah delay
+    setTimeout(() => {
+      entranceOverlay.classList.add("done");
+    }, 100);
+    // Remove element setelah animasi selesai
+    setTimeout(() => {
+      if (entranceOverlay) entranceOverlay.remove();
+    }, 1500);
+    // Tandai sudah visit
+    sessionStorage.setItem("sbi48_home_visited", "true");
+  } else {
+    // Langsung hide jika bukan dari splash atau sudah pernah visit
+    document.body.classList.add("entrance-skipped");
+    if (entranceOverlay) entranceOverlay.remove();
+    if (!sessionStorage.getItem("sbi48_home_visited")) {
+      sessionStorage.setItem("sbi48_home_visited", "true");
+    }
+  }
+
+  // Reset flag splash saat user navigate ke home dari link biasa
+  // (kecuali jika memang dari index.html)
+  if (!cameFromSplash) {
+    sessionStorage.removeItem("sbi48_splash_seen");
+  }
 
   // ========================================
   // 1. YEAR & LOGO FALLBACK
@@ -77,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         hero.style.setProperty("--pointer-y", `${((pointerY - rect.top) / rect.height) * 100}%`);
       }
 
-      // Lightweight sparkle trail
       const now = performance.now();
       if (now - lastSpark > 48) {
         lastSpark = now;
@@ -125,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createSparkleField();
 
   // ========================================
-  // 5. CLICK BURST EFFECT (PLAYFUL)
+  // 5. CLICK BURST EFFECT
   // ========================================
   if (!reduceMotion) {
     document.addEventListener("click", event => {
@@ -150,7 +183,195 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 6. HERO STAGE 3D TILT
+  // 6. SCROLL PROGRESS INDICATOR
+  // ========================================
+  const scrollProgress = $("#scrollProgress");
+  let progressTicking = false;
+
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = `${progress}%`;
+    progressTicking = false;
+  }
+
+  if (scrollProgress && !reduceMotion) {
+    window.addEventListener("scroll", () => {
+      if (progressTicking) return;
+      progressTicking = true;
+      requestAnimationFrame(updateScrollProgress);
+    }, { passive: true });
+  }
+
+  // ========================================
+  // 7. MAGNETIC BUTTONS
+  // ========================================
+  if (finePointer && !reduceMotion) {
+    const magneticElements = $$(".magnetic-btn, .magnetic-link");
+    
+    magneticElements.forEach(el => {
+      el.addEventListener("pointermove", event => {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = event.clientX - centerX;
+        const deltaY = event.clientY - centerY;
+        
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const maxDistance = Math.max(rect.width, rect.height);
+        const strength = Math.max(0, 1 - distance / maxDistance);
+        
+        // Translate ke arah kursor dengan kekuatan proporsional
+        const translateX = deltaX * strength * 0.3;
+        const translateY = deltaY * strength * 0.3;
+        
+        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
+      });
+
+      el.addEventListener("pointerleave", () => {
+        el.style.transform = "";
+      });
+    });
+  }
+
+  // ========================================
+  // 8. TEXT SCRAMBLE EFFECT ON HOVER
+  // ========================================
+  const chars = "!<>-_\\/[]{}—=+*^?#________";
+  
+  class TextScramble {
+    constructor(el) {
+      this.el = el;
+      this.originalText = el.textContent;
+      this.queue = [];
+      this.frame = 0;
+      this.frameRequest = null;
+      this.resolve = null;
+    }
+
+    setText(newText) {
+      const oldText = this.el.textContent;
+      const length = Math.max(oldText.length, newText.length);
+      this.queue = [];
+      
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 40);
+        const end = start + Math.floor(Math.random() * 40);
+        this.queue.push({ from, to, start, end });
+      }
+      
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.update();
+      
+      return new Promise(resolve => this.resolve = resolve);
+    }
+
+    update() {
+      let output = '';
+      let complete = 0;
+      
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i];
+        
+        if (this.frame >= end) {
+          complete++;
+          output += to;
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = chars[Math.floor(Math.random() * chars.length)];
+            this.queue[i].char = char;
+          }
+          output += `<span style="color:var(--cyan)">${char}</span>`;
+        } else {
+          output += from;
+        }
+      }
+      
+      this.el.innerHTML = output;
+      
+      if (complete === this.queue.length) {
+        if (this.resolve) this.resolve();
+      } else {
+        this.frameRequest = requestAnimationFrame(() => this.update());
+        this.frame++;
+      }
+    }
+  }
+
+  // Apply scramble effect to title on hover
+  const scrambleTitles = $$(".scramble-title");
+  scrambleTitles.forEach(title => {
+    const originalHTML = title.innerHTML;
+    const originalText = title.textContent;
+    const scrambler = new TextScramble(title);
+    let isHovering = false;
+
+    title.addEventListener("mouseenter", () => {
+      if (reduceMotion || isHovering) return;
+      isHovering = true;
+      scrambler.setText(originalText).then(() => {
+        // Restore HTML setelah animasi
+        setTimeout(() => {
+          title.innerHTML = originalHTML;
+          isHovering = false;
+        }, 300);
+      });
+    });
+  });
+
+  // ========================================
+  // 9. COUNTER ANIMATION
+  // ========================================
+  function animateCounter(element, target) {
+    const duration = 1500;
+    const start = 0;
+    const startTime = performance.now();
+    
+    element.classList.add("counting");
+    
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function (ease-out cubic)
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(start + (target - start) * eased);
+      
+      element.textContent = current;
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = target;
+        element.classList.remove("counting");
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
+
+  const factNumbers = $$(".fact-number[data-count]");
+  if (factNumbers.length > 0 && !reduceMotion && "IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.dataset.count, 10);
+          animateCounter(entry.target, target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    factNumbers.forEach(num => counterObserver.observe(num));
+  }
+
+  // ========================================
+  // 10. HERO STAGE 3D TILT
   // ========================================
   const stage = $("#heroStage");
   const stageCard = $("#stageCard");
@@ -168,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 7. HERO CAROUSEL
+  // 11. HERO CAROUSEL
   // ========================================
   const slides = [
     {
@@ -257,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   startCarousel();
 
   // ========================================
-  // 8. SCROLL REVEAL
+  // 12. SCROLL REVEAL
   // ========================================
   const revealItems = $$(".reveal");
   if ("IntersectionObserver" in window) {
@@ -275,7 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 9. NEWS FILTER
+  // 13. NEWS FILTER
   // ========================================
   const filterButtons = $$(".filter-button");
   const newsCards = $$(".news-card[data-category]");
@@ -296,7 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ========================================
-  // 10. BACK TO TOP
+  // 14. BACK TO TOP
   // ========================================
   const toTop = $("#toTop");
   let scrollTicking = false;
@@ -318,10 +539,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ========================================
-  // 11. 3D TILT ON CARDS (Playful Interaction)
+  // 15. 3D TILT ON CARDS
   // ========================================
   if (finePointer && !reduceMotion) {
-    $$(".news-card, .sister-pill").forEach(card => {
+    $$(".news-card, .sister-pill:not(.self-highlight)").forEach(card => {
       card.addEventListener("pointermove", event => {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -333,4 +554,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // ========================================
+  // 16. DYNAMIC STYLE INJECTION
+  // ========================================
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes pointerFade {
+      from { opacity: .95; transform: translate(-50%, -50%) scale(1); }
+      to { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  // ========================================
+  // 17. CONSOLE EASTER EGG
+  // ========================================
+  console.log(
+    "%c✦ SBI48 HOME ✦%c\nWelcome back, idol fans!\nExplore our universe.",
+    "background: linear-gradient(90deg, #6de1ff, #9b7bff); color: #06101b; padding: 8px 16px; font-size: 16px; font-weight: 900; border-radius: 4px;",
+    "color: #9ca7c3; font-size: 12px;"
+  );
 });

@@ -16,9 +16,22 @@
 </head>
 
 <body>
+  <!-- PAGE ENTRANCE OVERLAY (untuk animasi masuk dari index.html) -->
+  <div class="entrance-overlay" id="entranceOverlay" aria-hidden="true"></div>
+
+  <!-- SCROLL PROGRESS INDICATOR -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <div class="page-noise" aria-hidden="true"></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
   <div id="sparkleLayer" aria-hidden="true"></div>
+
+  <!-- AUDIO WAVE BACKGROUND -->
+  <div class="audio-wave-bg" aria-hidden="true">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+  </div>
 
   <!-- HEADER -->
   <header class="header" id="top">
@@ -57,12 +70,19 @@
 
       <div class="hero-copy">
         <div class="slide-tag" id="slideTag"><span>01</span> / INTRODUCING SBI48</div>
-        <h1 id="heroTitle">ONE GROUP.<br><span class="outline-text">NEW HISTORY.</span></h1>
+        <h1 id="heroTitle" data-text="ONE GROUP.">ONE GROUP.<br><span class="outline-text">NEW HISTORY.</span></h1>
         <p class="hero-lead" id="heroLead">Super Boy Indonesia 48 — Overseas Male Group dari AKB48 Group. Berawal dari Purwokerto, melangkah menuju panggung yang lebih luas.</p>
         
         <div class="hero-buttons">
-          <a class="btn btn-primary" href="members.html">MEET THE MEMBERS <span>↗</span></a>
-          <a class="btn btn-outline" href="history.html">OUR STORY <span>→</span></a>
+          <a class="btn btn-primary magnetic-btn" href="members.html">
+            <span class="btn-text">MEET THE MEMBERS</span>
+            <span class="btn-arrow">↗</span>
+            <span class="btn-shine"></span>
+          </a>
+          <a class="btn btn-outline magnetic-btn" href="history.html">
+            <span class="btn-text">OUR STORY</span>
+            <span class="btn-arrow">→</span>
+          </a>
         </div>
 
         <div class="hero-proof">
@@ -120,9 +140,11 @@
         <span>SUPER BOY INDONESIA 48</span><b>✳</b>
         <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
         <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
+        <span>SBI48</span><b>✦</b>
         <span>SUPER BOY INDONESIA 48</span><b>✳</b>
         <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
         <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
+        <span>SBI48</span><b>✦</b>
       </div>
     </div>
 
@@ -132,18 +154,27 @@
       <div class="about-grid">
         <div class="about-title reveal">
           <p class="micro-label">A DIFFERENT KIND OF IDOL CULTURE</p>
-          <h2>MORE THAN<br><span class="gradient-text">AN IDOL GROUP.</span></h2>
+          <h2 class="scramble-title" data-text="MORE THAN">MORE THAN<br><span class="gradient-text">AN IDOL GROUP.</span></h2>
         </div>
         <div class="about-copy reveal">
           <p class="about-lead">Sebuah cerita baru dalam keluarga besar 48 Group.</p>
-          <p>SBI48 membawa semangat <em>“Idols you can meet”</em> dengan identitas Indonesia, energi panggung yang khas, dan hubungan dekat antara member dengan fans.</p>
-          <a class="under-link" href="history.html">GET TO KNOW OUR HISTORY <span>↗</span></a>
+          <p>SBI48 membawa semangat <em>"Idols you can meet"</em> dengan identitas Indonesia, energi panggung yang khas, dan hubungan dekat antara member dengan fans.</p>
+          <a class="under-link magnetic-link" href="history.html">GET TO KNOW OUR HISTORY <span>↗</span></a>
         </div>
       </div>
       <div class="fact-strip reveal">
-        <div class="fact"><span class="fact-number" data-count="2018">2018</span><span class="fact-caption">THE STORY BEGINS</span></div>
-        <div class="fact"><span class="fact-number fact-location">PURWOKERTO</span><span class="fact-caption">OUR HOMETOWN</span></div>
-        <div class="fact"><span class="fact-number">ONE <em>48</em></span><span class="fact-caption">ONE COMMUNITY</span></div>
+        <div class="fact">
+          <span class="fact-number" data-count="2018">0</span>
+          <span class="fact-caption">THE STORY BEGINS</span>
+        </div>
+        <div class="fact">
+          <span class="fact-number fact-location" data-text="PURWOKERTO">PURWOKERTO</span>
+          <span class="fact-caption">OUR HOMETOWN</span>
+        </div>
+        <div class="fact">
+          <span class="fact-number">ONE <em>48</em></span>
+          <span class="fact-caption">ONE COMMUNITY</span>
+        </div>
       </div>
     </section>
 
@@ -156,6 +187,11 @@
       </div>
       
       <div class="sister-grid reveal">
+        <!-- SBI48 HIGHLIGHTED SEBAGAI GRUP UTAMA -->
+        <a href="#" class="sister-pill self-highlight" onclick="return false;">
+          <span class="self-badge">★ THIS IS US ★</span>
+          SBI48
+        </a>
         <a href="https://www.akb48.co.jp/" target="_blank" rel="noopener" class="sister-pill">AKB48</a>
         <a href="https://www.ske48.co.jp/" target="_blank" rel="noopener" class="sister-pill">SKE48</a>
         <a href="https://www.nmb48.com/" target="_blank" rel="noopener" class="sister-pill">NMB48</a>
@@ -179,7 +215,7 @@
           <div class="section-label"><span>03</span><i></i> FROM SBI48</div>
           <h2>THE LATEST<br><span class="outline-text">UPDATES.</span></h2>
         </div>
-        <a class="under-link" href="schedule.html">ALL NEWS <span>↗</span></a>
+        <a class="under-link magnetic-link" href="schedule.html">ALL NEWS <span>↗</span></a>
       </div>
 
       <div class="filter-row reveal" role="group" aria-label="Filter kategori berita">
@@ -244,7 +280,11 @@
             <p class="micro-label">MEET THE BOYS</p>
             <h2>EVERY MEMBER.<br><span class="outline-text">ONE STORY.</span></h2>
             <p>Setiap member membawa warna, mimpi, dan cerita yang berbeda. Kenali mereka lebih dekat.</p>
-            <a class="btn btn-white" href="members.html">MEET OUR MEMBERS <span>↗</span></a>
+            <a class="btn btn-white magnetic-btn" href="members.html">
+              <span class="btn-text">MEET OUR MEMBERS</span>
+              <span class="btn-arrow">↗</span>
+              <span class="btn-shine"></span>
+            </a>
           </div>
           <div class="member-graphic reveal" aria-hidden="true">
             <span class="member-giant">48</span>
@@ -263,7 +303,11 @@
       <p class="micro-label reveal">YOU ARE PART OF THE STORY</p>
       <h2 class="reveal">LET'S MEET<br><span class="outline-text">AT THE THEATER.</span></h2>
       <p class="reveal">Panggung ini terasa lengkap karena ada kamu.</p>
-      <a class="btn btn-primary reveal" href="fanclub.html">JOIN THE FANCLUB <span>↗</span></a>
+      <a class="btn btn-primary magnetic-btn reveal" href="fanclub.html">
+        <span class="btn-text">JOIN THE FANCLUB</span>
+        <span class="btn-arrow">↗</span>
+        <span class="btn-shine"></span>
+      </a>
     </section>
   </main>
 
