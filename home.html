@@ -15,23 +15,10 @@
   <script src="home.js" defer></script>
 </head>
 
-<body>
-  <!-- PAGE ENTRANCE OVERLAY (untuk animasi masuk dari index.html) -->
-  <div class="entrance-overlay" id="entranceOverlay" aria-hidden="true"></div>
-
-  <!-- SCROLL PROGRESS INDICATOR -->
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
+<body class="home-loaded">
   <div class="page-noise" aria-hidden="true"></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
   <div id="sparkleLayer" aria-hidden="true"></div>
-
-  <!-- AUDIO WAVE BACKGROUND -->
-  <div class="audio-wave-bg" aria-hidden="true">
-    <div class="wave wave-1"></div>
-    <div class="wave wave-2"></div>
-    <div class="wave wave-3"></div>
-  </div>
 
   <!-- HEADER -->
   <header class="header" id="top">
@@ -52,7 +39,7 @@
       <a class="nav-link" href="schedule.html">SCHEDULE</a>
       <a class="nav-link" href="diskografi.html">DISCOGRAPHY</a>
       <a class="nav-link" href="teater.html">THEATER</a>
-      <a class="nav-cta" href="fanclub.html">FANCLUB <span>↗</span></a>
+      <a class="nav-cta magnetic-btn" href="fanclub.html">FANCLUB <span>↗</span></a>
     </nav>
   </header>
 
@@ -70,19 +57,12 @@
 
       <div class="hero-copy">
         <div class="slide-tag" id="slideTag"><span>01</span> / INTRODUCING SBI48</div>
-        <h1 id="heroTitle" data-text="ONE GROUP.">ONE GROUP.<br><span class="outline-text">NEW HISTORY.</span></h1>
+        <h1 id="heroTitle">ONE GROUP.<br><span class="outline-text">NEW HISTORY.</span></h1>
         <p class="hero-lead" id="heroLead">Super Boy Indonesia 48 — Overseas Male Group dari AKB48 Group. Berawal dari Purwokerto, melangkah menuju panggung yang lebih luas.</p>
         
         <div class="hero-buttons">
-          <a class="btn btn-primary magnetic-btn" href="members.html">
-            <span class="btn-text">MEET THE MEMBERS</span>
-            <span class="btn-arrow">↗</span>
-            <span class="btn-shine"></span>
-          </a>
-          <a class="btn btn-outline magnetic-btn" href="history.html">
-            <span class="btn-text">OUR STORY</span>
-            <span class="btn-arrow">→</span>
-          </a>
+          <a class="btn btn-primary magnetic-btn" href="members.html">MEET THE MEMBERS <span>↗</span></a>
+          <a class="btn btn-outline magnetic-btn" href="history.html">OUR STORY <span>→</span></a>
         </div>
 
         <div class="hero-proof">
@@ -123,13 +103,13 @@
           <span>SCROLL TO DISCOVER</span>
         </div>
         <div class="slide-controls">
-          <button class="slide-arrow" id="prevSlide" aria-label="Slide sebelumnya">←</button>
+          <button class="slide-arrow magnetic-btn" id="prevSlide" aria-label="Slide sebelumnya">←</button>
           <div class="slide-dots" role="group" aria-label="Pilih slide">
             <button class="slide-dot is-active" data-slide="0" aria-label="Slide 1"></button>
             <button class="slide-dot" data-slide="1" aria-label="Slide 2"></button>
             <button class="slide-dot" data-slide="2" aria-label="Slide 3"></button>
           </div>
-          <button class="slide-arrow" id="nextSlide" aria-label="Slide berikutnya">→</button>
+          <button class="slide-arrow magnetic-btn" id="nextSlide" aria-label="Slide berikutnya">→</button>
         </div>
       </div>
     </section>
@@ -140,11 +120,9 @@
         <span>SUPER BOY INDONESIA 48</span><b>✳</b>
         <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
         <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
-        <span>SBI48</span><b>✦</b>
         <span>SUPER BOY INDONESIA 48</span><b>✳</b>
         <span>THE IDOLS YOU CAN MEET</span><b>✳</b>
         <span>FROM PURWOKERTO TO THE WORLD</span><b>✳</b>
-        <span>SBI48</span><b>✦</b>
       </div>
     </div>
 
@@ -154,31 +132,22 @@
       <div class="about-grid">
         <div class="about-title reveal">
           <p class="micro-label">A DIFFERENT KIND OF IDOL CULTURE</p>
-          <h2 class="scramble-title" data-text="MORE THAN">MORE THAN<br><span class="gradient-text">AN IDOL GROUP.</span></h2>
+          <h2>MORE THAN<br><span class="gradient-text">AN IDOL GROUP.</span></h2>
         </div>
         <div class="about-copy reveal">
           <p class="about-lead">Sebuah cerita baru dalam keluarga besar 48 Group.</p>
-          <p>SBI48 membawa semangat <em>"Idols you can meet"</em> dengan identitas Indonesia, energi panggung yang khas, dan hubungan dekat antara member dengan fans.</p>
-          <a class="under-link magnetic-link" href="history.html">GET TO KNOW OUR HISTORY <span>↗</span></a>
+          <p>SBI48 membawa semangat <em>“Idols you can meet”</em> dengan identitas Indonesia, energi panggung yang khas, dan hubungan dekat antara member dengan fans.</p>
+          <a class="under-link magnetic-btn" href="history.html">GET TO KNOW OUR HISTORY <span>↗</span></a>
         </div>
       </div>
       <div class="fact-strip reveal">
-        <div class="fact">
-          <span class="fact-number" data-count="2018">0</span>
-          <span class="fact-caption">THE STORY BEGINS</span>
-        </div>
-        <div class="fact">
-          <span class="fact-number fact-location" data-text="PURWOKERTO">PURWOKERTO</span>
-          <span class="fact-caption">OUR HOMETOWN</span>
-        </div>
-        <div class="fact">
-          <span class="fact-number">ONE <em>48</em></span>
-          <span class="fact-caption">ONE COMMUNITY</span>
-        </div>
+        <div class="fact"><span class="fact-number" data-count="2018">2018</span><span class="fact-caption">THE STORY BEGINS</span></div>
+        <div class="fact"><span class="fact-number fact-location">PURWOKERTO</span><span class="fact-caption">OUR HOMETOWN</span></div>
+        <div class="fact"><span class="fact-number">ONE <em>48</em></span><span class="fact-caption">ONE COMMUNITY</span></div>
       </div>
     </section>
 
-    <!-- 48G SISTER GROUPS UNIVERSE -->
+    <!-- 48G SISTER GROUPS UNIVERSE (UPDATED WITH LOGOS & SBI48) -->
     <section class="sister-groups section-wrap">
       <div class="section-label reveal"><span>02</span><i></i> THE 48G UNIVERSE</div>
       <div class="sister-header reveal">
@@ -187,24 +156,125 @@
       </div>
       
       <div class="sister-grid reveal">
-        <!-- SBI48 HIGHLIGHTED SEBAGAI GRUP UTAMA -->
-        <a href="#" class="sister-pill self-highlight" onclick="return false;">
-          <span class="self-badge">★ THIS IS US ★</span>
-          SBI48
+        <!-- SBI48 (Our Home) -->
+        <a href="home.html" class="sister-card highlight-home">
+          <div class="sister-logo-wrapper">
+            <img src="logosbi.png" alt="SBI48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo sbi48-logo" style="display:none;"><span>SBI</span><b>48</b></div>
+          </div>
+          <span class="sister-name">SBI48</span>
+          <span class="sister-loc">Purwokerto, Indonesia</span>
         </a>
-        <a href="https://www.akb48.co.jp/" target="_blank" rel="noopener" class="sister-pill">AKB48</a>
-        <a href="https://www.ske48.co.jp/" target="_blank" rel="noopener" class="sister-pill">SKE48</a>
-        <a href="https://www.nmb48.com/" target="_blank" rel="noopener" class="sister-pill">NMB48</a>
-        <a href="https://www.hkt48.jp/" target="_blank" rel="noopener" class="sister-pill">HKT48</a>
-        <a href="https://www.ngt48.jp/" target="_blank" rel="noopener" class="sister-pill">NGT48</a>
-        <a href="https://www.stu48.com/" target="_blank" rel="noopener" class="sister-pill">STU48</a>
-        <a href="https://www.jkt48.com/" target="_blank" rel="noopener" class="sister-pill">JKT48</a>
-        <a href="https://www.bnk48.com/" target="_blank" rel="noopener" class="sister-pill">BNK48</a>
-        <a href="https://www.tpe48.com/" target="_blank" rel="noopener" class="sister-pill">TPE48</a>
-        <a href="https://www.mnl48.com/" target="_blank" rel="noopener" class="sister-pill">MNL48</a>
-        <a href="https://www.tsh48.com/" target="_blank" rel="noopener" class="sister-pill">TSH48</a>
-        <a href="https://www.cgm48.com/" target="_blank" rel="noopener" class="sister-pill">CGM48</a>
-        <a href="https://klp48.my/" target="_blank" rel="noopener" class="sister-pill">KLP48</a>
+
+        <!-- Japan -->
+        <a href="https://www.akb48.co.jp/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="akb48.png" alt="AKB48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo akb48-logo" style="display:none;"><span>AKB</span><b>48</b></div>
+          </div>
+          <span class="sister-name">AKB48</span>
+          <span class="sister-loc">Tokyo, Japan</span>
+        </a>
+
+        <a href="https://www.ske48.co.jp/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="ske48.png" alt="SKE48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo ske48-logo" style="display:none;"><span>SKE</span><b>48</b></div>
+          </div>
+          <span class="sister-name">SKE48</span>
+          <span class="sister-loc">Nagoya, Japan</span>
+        </a>
+
+        <a href="https://www.nmb48.com/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="nmb48.png" alt="NMB48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo nmb48-logo" style="display:none;"><span>NMB</span><b>48</b></div>
+          </div>
+          <span class="sister-name">NMB48</span>
+          <span class="sister-loc">Osaka, Japan</span>
+        </a>
+
+        <a href="https://www.hkt48.jp/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="hkt48.png" alt="HKT48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo hkt48-logo" style="display:none;"><span>HKT</span><b>48</b></div>
+          </div>
+          <span class="sister-name">HKT48</span>
+          <span class="sister-loc">Fukuoka, Japan</span>
+        </a>
+
+        <a href="https://www.ngt48.jp/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="ngt48.png" alt="NGT48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo ngt48-logo" style="display:none;"><span>NGT</span><b>48</b></div>
+          </div>
+          <span class="sister-name">NGT48</span>
+          <span class="sister-loc">Niigata, Japan</span>
+        </a>
+
+        <a href="https://www.stu48.com/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="stu48.png" alt="STU48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo stu48-logo" style="display:none;"><span>STU</span><b>48</b></div>
+          </div>
+          <span class="sister-name">STU48</span>
+          <span class="sister-loc">Setouchi, Japan</span>
+        </a>
+
+        <!-- International -->
+        <a href="https://www.jkt48.com/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="jkt48.png" alt="JKT48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo jkt48-logo" style="display:none;"><span>JKT</span><b>48</b></div>
+          </div>
+          <span class="sister-name">JKT48</span>
+          <span class="sister-loc">Jakarta, Indonesia</span>
+        </a>
+
+        <a href="https://www.bnk48.com/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="bnk48.png" alt="BNK48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo bnk48-logo" style="display:none;"><span>BNK</span><b>48</b></div>
+          </div>
+          <span class="sister-name">BNK48</span>
+          <span class="sister-loc">Bangkok, Thailand</span>
+        </a>
+
+        <a href="https://cgm48official.com/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="cgm48.png" alt="CGM48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo cgm48-logo" style="display:none;"><span>CGM</span><b>48</b></div>
+          </div>
+          <span class="sister-name">CGM48</span>
+          <span class="sister-loc">Chiang Mai, Thailand</span>
+        </a>
+
+        <a href="https://www.tpe48.tw/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="tpe48.png" alt="TPE48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo tpe48-logo" style="display:none;"><span>TPE</span><b>48</b></div>
+          </div>
+          <span class="sister-name">TPE48</span>
+          <span class="sister-loc">Taipei, Taiwan</span>
+        </a>
+
+        <a href="https://tsh48.com.cn/en/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="tsh48.png" alt="TSH48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo tsh48-logo" style="display:none;"><span>TSH</span><b>48</b></div>
+          </div>
+          <span class="sister-name">TSH48</span>
+          <span class="sister-loc">Shanghai, China</span>
+        </a>
+
+        <a href="https://klp48.my/" target="_blank" rel="noopener" class="sister-card">
+          <div class="sister-logo-wrapper">
+            <img src="klp48.png" alt="KLP48" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="css-logo klp48-logo" style="display:none;"><span>KLP</span><b>48</b></div>
+          </div>
+          <span class="sister-name">KLP48</span>
+          <span class="sister-loc">Kuala Lumpur, Malaysia</span>
+        </a>
       </div>
     </section>
 
@@ -215,14 +285,14 @@
           <div class="section-label"><span>03</span><i></i> FROM SBI48</div>
           <h2>THE LATEST<br><span class="outline-text">UPDATES.</span></h2>
         </div>
-        <a class="under-link magnetic-link" href="schedule.html">ALL NEWS <span>↗</span></a>
+        <a class="under-link magnetic-btn" href="schedule.html">ALL NEWS <span>↗</span></a>
       </div>
 
       <div class="filter-row reveal" role="group" aria-label="Filter kategori berita">
-        <button class="filter-button is-selected" data-filter="all">ALL</button>
-        <button class="filter-button" data-filter="news">NEWS</button>
-        <button class="filter-button" data-filter="event">EVENT</button>
-        <button class="filter-button" data-filter="music">MUSIC</button>
+        <button class="filter-button is-selected magnetic-btn" data-filter="all">ALL</button>
+        <button class="filter-button magnetic-btn" data-filter="news">NEWS</button>
+        <button class="filter-button magnetic-btn" data-filter="event">EVENT</button>
+        <button class="filter-button magnetic-btn" data-filter="music">MUSIC</button>
       </div>
 
       <div class="news-grid">
@@ -280,11 +350,7 @@
             <p class="micro-label">MEET THE BOYS</p>
             <h2>EVERY MEMBER.<br><span class="outline-text">ONE STORY.</span></h2>
             <p>Setiap member membawa warna, mimpi, dan cerita yang berbeda. Kenali mereka lebih dekat.</p>
-            <a class="btn btn-white magnetic-btn" href="members.html">
-              <span class="btn-text">MEET OUR MEMBERS</span>
-              <span class="btn-arrow">↗</span>
-              <span class="btn-shine"></span>
-            </a>
+            <a class="btn btn-white magnetic-btn" href="members.html">MEET OUR MEMBERS <span>↗</span></a>
           </div>
           <div class="member-graphic reveal" aria-hidden="true">
             <span class="member-giant">48</span>
@@ -303,11 +369,7 @@
       <p class="micro-label reveal">YOU ARE PART OF THE STORY</p>
       <h2 class="reveal">LET'S MEET<br><span class="outline-text">AT THE THEATER.</span></h2>
       <p class="reveal">Panggung ini terasa lengkap karena ada kamu.</p>
-      <a class="btn btn-primary magnetic-btn reveal" href="fanclub.html">
-        <span class="btn-text">JOIN THE FANCLUB</span>
-        <span class="btn-arrow">↗</span>
-        <span class="btn-shine"></span>
-      </a>
+      <a class="btn btn-primary magnetic-btn reveal" href="fanclub.html">JOIN THE FANCLUB <span>↗</span></a>
     </section>
   </main>
 
@@ -330,6 +392,6 @@
   </footer>
 
   <!-- BACK TO TOP -->
-  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑</button>
+  <button class="to-top magnetic-btn" id="toTop" aria-label="Kembali ke atas">↑</button>
 </body>
 </html>
