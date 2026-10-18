@@ -1,5 +1,6 @@
 /* ========================================
    SBI48 — HOME INTERACTIVE EXPERIENCE
+   (Updated with Sister Group Tilt & Page Enter)
 ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,7 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const random = (min, max) => Math.random() * (max - min) + min;
 
   // ========================================
-  // 1. YEAR & LOGO FALLBACK
+  // 1. PAGE ENTER ANIMATION TRIGGER
+  // ========================================
+  // Hapus class page-enter setelah animasi selesai agar tidak mengganggu state nanti
+  setTimeout(() => {
+    document.body.classList.remove("page-enter");
+  }, 1000);
+
+  // ========================================
+  // 2. YEAR & LOGO FALLBACK
   // ========================================
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();
@@ -25,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ========================================
-  // 2. RESPONSIVE NAVIGATION
+  // 3. RESPONSIVE NAVIGATION
   // ========================================
   const menuButton = $("#menuButton");
   const nav = $("#siteNav");
@@ -53,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 3. CURSOR GLOW & POINTER TRAIL
+  // 4. CURSOR GLOW & POINTER TRAIL
   // ========================================
   const glow = $("#cursorGlow");
   const hero = $(".hero");
@@ -77,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         hero.style.setProperty("--pointer-y", `${((pointerY - rect.top) / rect.height) * 100}%`);
       }
 
-      // Lightweight sparkle trail
       const now = performance.now();
       if (now - lastSpark > 48) {
         lastSpark = now;
@@ -96,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 4. TWINKLING GLITTER FIELD
+  // 5. TWINKLING GLITTER FIELD
   // ========================================
   function createSparkleField() {
     if (reduceMotion) return;
@@ -125,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createSparkleField();
 
   // ========================================
-  // 5. CLICK BURST EFFECT (PLAYFUL)
+  // 6. CLICK BURST EFFECT
   // ========================================
   if (!reduceMotion) {
     document.addEventListener("click", event => {
@@ -146,29 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(burst);
         setTimeout(() => burst.remove(), 800);
       }
-    });
-  }
-
-  // ========================================
-  // 6. MAGNETIC BUTTON EFFECT
-  // ========================================
-  if (finePointer && !reduceMotion) {
-    $$(".magnetic-btn").forEach(btn => {
-      btn.addEventListener("pointermove", event => {
-        const rect = btn.getBoundingClientRect();
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
-        
-        // Limit the movement to keep it subtle
-        const moveX = x * 0.3;
-        const moveY = y * 0.3;
-        
-        btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
-      });
-
-      btn.addEventListener("pointerleave", () => {
-        btn.style.transform = "translate(0, 0)";
-      });
     });
   }
 
@@ -341,31 +326,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ========================================
-  // 12. 3D TILT ON CARDS (Playful Interaction)
+  // 12. 3D TILT ON CARDS (News & Sister Groups)
   // ========================================
   if (finePointer && !reduceMotion) {
-    $$(".news-card, .sister-card").forEach(card => {
+    $$(".news-card, .group-card").forEach(card => {
       card.addEventListener("pointermove", event => {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(800px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-3px)`;
+        // Tilt yang lebih halus untuk kartu grup agar tidak terlalu 'goyang'
+        const tiltX = card.classList.contains("group-card") ? 6 : 5;
+        const tiltY = card.classList.contains("group-card") ? 6 : 5;
+        
+        card.style.transform = `perspective(800px) rotateX(${-y * tiltX}deg) rotateY(${x * tiltY}deg) translateY(-8px)`;
       });
       card.addEventListener("pointerleave", () => {
         card.style.transform = "";
       });
     });
   }
-
-  // ========================================
-  // 13. DYNAMIC STYLE INJECTION
-  // ========================================
-  const styleSheet = document.createElement("style");
-  styleSheet.textContent = `
-    @keyframes pointerFade {
-      from { opacity: .95; transform: translate(-50%, -50%) scale(1); }
-      to { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-    }
-  `;
-  document.head.appendChild(styleSheet);
 });

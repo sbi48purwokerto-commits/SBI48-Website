@@ -1,6 +1,6 @@
 /* ========================================
    SBI48 — SPLASH LANDING INTERACTION
-   script.js
+   index.js
 ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,9 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const random = (min, max) => Math.random() * (max - min) + min;
 
   // ========================================
+  // 0. PERBAIKAN NAVIGASI "BACK" (BFCache Fix)
+  // Mencegah overlay exit terjebak saat user menekan tombol "Back" browser
+  // ========================================
+  window.addEventListener('pageshow', (event) => {
+    const exitOverlay = $("#exitOverlay");
+    if (exitOverlay) {
+      exitOverlay.classList.remove('active');
+      exitOverlay.setAttribute('aria-hidden', 'true');
+    }
+    
+    // Jika halaman dimuat dari cache browser (tombol back), 
+    // kita tetap terapkan skip-animations agar halaman langsung "utuh" dan rapi
+    if (event.persisted) {
+      document.body.classList.add("skip-animations");
+    }
+  });
+
+  // ========================================
   // 1. SKIP ANIMATION CHECK
-  // Jika user kembali dari home.html (atau sudah pernah lihat animasi),
-  // langsung tampilkan state final tanpa animasi masuk.
   // ========================================
   const hasSeenAnimation = sessionStorage.getItem("sbi48_splash_seen");
   const cameFromHome = document.referrer.includes("home.html");
@@ -23,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hasSeenAnimation || cameFromHome) {
     document.body.classList.add("skip-animations");
   } else {
-    // Tandai bahwa user sudah melihat animasi
     sessionStorage.setItem("sbi48_splash_seen", "true");
   }
 
@@ -37,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. CURSOR GLOW
   // ========================================
   const glow = $("#cursorGlow");
-
   if (finePointer && !reduceMotion) {
     window.addEventListener("pointermove", event => {
       if (glow) {
@@ -81,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ========================================
   if (!reduceMotion) {
     document.addEventListener("click", event => {
-      // Jangan burst kalau klik tombol enter (akan ada exit animation)
       if (event.target.closest(".enter-button")) return;
 
       const burstCount = 10;
@@ -105,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 6. LOGO HOVER TILT (subtle, bukan follow cursor)
+  // 6. LOGO HOVER TILT (3D Subtle)
   // ========================================
   const logoStage = $("#logoStage");
   const logoRotate = $("#logoRotate");
@@ -116,14 +129,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-      // Tilt halus, tidak mengikuti penuh
+      // Tilt 3D halus saat hover, tidak mengganggu animasi float
       logoRotate.style.transition = "transform .3s ease-out";
-      logoRotate.style.transform = `rotateY(${x * 15}deg) rotateX(${-y * 15}deg) scale(1.03)`;
+      logoRotate.style.transform = `rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.03)`;
     });
 
     logoStage.addEventListener("pointerleave", () => {
       logoRotate.style.transition = "transform .6s ease-out";
-      logoRotate.style.transform = "";
+      logoRotate.style.transform = ""; // Kembali ke animasi float default CSS
     });
   }
 
@@ -136,24 +149,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (enterButton && exitOverlay) {
     enterButton.addEventListener("click", event => {
       event.preventDefault();
-
-      // Cegah double click
       if (exitOverlay.classList.contains("active")) return;
 
-      // Tandai bahwa user sudah masuk ke home
       sessionStorage.setItem("sbi48_splash_seen", "true");
 
-      // Hitung posisi klik untuk origin animasi
       const rect = enterButton.getBoundingClientRect();
       const originX = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
       const originY = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
 
       exitOverlay.style.transformOrigin = `${originX}% ${originY}%`;
-
-      // Trigger exit animation
       exitOverlay.classList.add("active");
 
-      // Redirect setelah animasi selesai
       setTimeout(() => {
         window.location.href = enterButton.href;
       }, 900);
@@ -161,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 8. KEYBOARD SUPPORT — ENTER untuk masuk
+  // 8. KEYBOARD SUPPORT
   // ========================================
   document.addEventListener("keydown", event => {
     if (event.key === "Enter" && enterButton && !exitOverlay.classList.contains("active")) {
@@ -174,8 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ========================================
   if (finePointer && !reduceMotion) {
     const glows = $$(".bg-glow");
-    const orbits = $$(".orbit-ring");
-
     window.addEventListener("pointermove", event => {
       const x = (event.clientX / window.innerWidth - 0.5) * 2;
       const y = (event.clientY / window.innerHeight - 0.5) * 2;
@@ -184,22 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const depth = (i + 1) * 8;
         glow.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
       });
-
-      // Orbit tidak perlu transform karena sudah punya animasi sendiri
     }, { passive: true });
   }
 
   // ========================================
-  // 10. CLEAR SESSION FLAG SAAT TAB DITUTUP
-  // (opsional — biar next visit tetap lihat animasi)
-  // ========================================
-  window.addEventListener("pagehide", () => {
-    // Biarkan sessionStorage tetap ada selama tab masih hidup
-    // agar saat kembali dari home.html, animasi tidak terulang
-  });
-
-  // ========================================
-  // 11. LOGO FALLBACK HANDLING
+  // 10. LOGO FALLBACK HANDLING
   // ========================================
   const splashLogo = $("#splashLogo");
   const logoFallback = $("#logoFallback");
@@ -211,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========================================
-  // 12. DYNAMIC STYLE INJECTION
+  // 11. DYNAMIC STYLE INJECTION
   // ========================================
   const styleSheet = document.createElement("style");
   styleSheet.textContent = `
@@ -223,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.head.appendChild(styleSheet);
 
   // ========================================
-  // 13. CONSOLE EASTER EGG
+  // 12. CONSOLE EASTER EGG
   // ========================================
   console.log(
     "%c✦ SBI48 ✦%c\nThe Idols You Can Meet.\nFrom Purwokerto, with pride.",
