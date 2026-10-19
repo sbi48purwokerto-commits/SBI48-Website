@@ -1,191 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SBI48 Schedule — Jadwal Show & Event">
-  <title>SBI48 — Schedule</title>
+ an="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Jadwal pertunjukan dan event SBI48.">
+  <title>SCHEDULE — SBI48 Official Website</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Library untuk membaca CSV dengan mudah dan aman -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  
   <link rel="stylesheet" href="schedule.css">
+  <script src="schedule.js" defer></script>
 </head>
+
 <body>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div id="sparkleLayer" aria-hidden="true"></div>
 
-  <!-- ===== SIDEBAR ===== -->
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <a href="home.html" class="sidebar-brand">
-        <span class="brand-mark">SBI</span><span class="brand-number">48</span>
-      </a>
-      <button class="sidebar-close" id="sidebar-close" aria-label="Tutup menu">✕</button>
-    </div>
-    <nav class="sidebar-nav">
-      <a href="home.html" class="sidebar-link"><span class="link-icon">🏠</span> Beranda</a>
-      <a href="members.html" class="sidebar-link"><span class="link-icon">👥</span> Members</a>
-      <a href="schedule.html" class="sidebar-link active"><span class="link-icon">📅</span> Jadwal</a>
-      <a href="theater.html" class="sidebar-link"><span class="link-icon">🎭</span> Theater</a>
-      <a href="discography.html" class="sidebar-link"><span class="link-icon">🎵</span> Diskografi</a>
-      <a href="news.html" class="sidebar-link"><span class="link-icon"></span> Berita</a>
-      <a href="about.html" class="sidebar-link"><span class="link-icon">ℹ️</span> Tentang</a>
-    </nav>
-    <div class="sidebar-footer">
-      <a href="fanclub.html" class="fanclub-btn">JOIN FANCLUB</a>
-      <div class="sidebar-socials">
-        <a href="#" class="social-icon">📷</a>
-        <a href="#" class="social-icon">🐦</a>
-        <a href="#" class="social-icon">▶️</a>
-        <a href="#" class="social-icon">🎵</a>
-      </div>
-      <p class="sidebar-copy">© 2026 SBI48 Official</p>
-    </div>
-  </aside>
-
-  <!-- ===== TOPBAR ===== -->
-  <header class="topbar">
-    <button class="menu-btn" id="menu-btn" aria-label="Buka menu">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-    <a href="home.html" class="topbar-brand">
-      <span class="brand-mark">SBI</span><span class="brand-number">48</span>
+  <!-- HEADER -->
+  <header class="header" id="top">
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+        <span class="logo-sub">OFFICIAL WEBSITE</span>
     </a>
-    <div class="topbar-actions">
-      <button class="lang-btn">ID</button>
-      <a href="fanclub.html" class="topbar-fanclub">FANCLUB</a>
-    </div>
+
+    <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="siteNav" aria-label="Buka navigasi">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="siteNav" aria-label="Navigasi utama">
+      <a class="nav-link splash-link" href="index.html" aria-label="Kembali ke halaman splash">
+        <span class="splash-icon">✦</span> SPLASH
+      </a>
+      <a class="nav-link" href="home.html">HOME</a>
+      <a class="nav-link" href="members.html">MEMBERS</a>
+      <a class="nav-link" href="history.html">HISTORY</a>
+      <a class="nav-link is-active" href="schedule.html">SCHEDULE</a>
+      <a class="nav-link" href="diskografi.html">DISCOGRAPHY</a>
+      <a class="nav-link" href="teater.html">THEATER</a>
+      <a class="nav-cta" href="fanclub.html">FANCLUB <span>↗</span></a>
+    </nav>
   </header>
 
-  <!-- ===== MAIN ===== -->
   <main>
+    <!-- HERO SECTION -->
+    <section class="schedule-hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
 
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-      <div class="page-hero-bg"></div>
-      <div class="page-hero-content" data-animate="fade-up">
-        <a href="home.html" class="back-link">← Kembali ke Beranda</a>
-        <p class="eyebrow">SCHEDULE</p>
-        <h1>JADWAL SHOW & EVENT</h1>
-        <p class="page-hero-sub">Temukan pertunjukan favoritmu. Dari Purwokerto ke seluruh Indonesia.</p>
+      <div class="hero-content reveal">
+        <div class="slide-tag"><span>03</span> / THE STAGE AWAITS</div>
+        <h1>UPCOMING<br><span class="gradient-text">SCHEDULES.</span></h1>
+        <p class="hero-lead">Jangan lewatkan momen bersama SBI48. Dari panggung teater hingga konser besar, kami menantimu.</p>
       </div>
+      
+      <div class="stage-deco deco-1">🎟️</div>
+      <div class="stage-deco deco-2">🎤</div>
+      <div class="stage-deco deco-3">✨</div>
     </section>
 
-    <!-- FILTER BAR -->
-    <section class="filter-bar" data-animate="fade-up">
-      <div class="filter-container">
-        <div class="filter-group">
-          <label class="filter-label">TAHUN</label>
-          <select id="year-filter" class="filter-select">
-            <option value="2026">2026</option>
-            <option value="2025">2025</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <label class="filter-label">BULAN</label>
-          <select id="month-filter" class="filter-select">
-            <option value="0">Januari</option>
-            <option value="1">Februari</option>
-            <option value="2">Maret</option>
-            <option value="3">April</option>
-            <option value="4">Mei</option>
-            <option value="5">Juni</option>
-            <option value="6">Juli</option>
-            <option value="7">Agustus</option>
-            <option value="8" selected>September</option>
-            <option value="9">Oktober</option>
-            <option value="10">November</option>
-            <option value="11">Desember</option>
-          </select>
-        </div>
-        <div class="filter-group category-group">
-          <label class="filter-label">KATEGORI</label>
-          <div class="category-tabs" id="category-tabs">
-            <button class="cat-tab active" data-cat="all">ALL</button>
-            <button class="cat-tab" data-cat="show">SHOW</button>
-            <button class="cat-tab" data-cat="event">EVENT</button>
-          </div>
-        </div>
+    <!-- FILTER & GRID SECTION -->
+    <section class="schedule-section section-wrap">
+      <div class="filter-row reveal" role="group" aria-label="Filter kategori jadwal">
+        <button class="filter-button is-selected" data-filter="ALL">ALL SHOWS</button>
+        <button class="filter-button" data-filter="Theater Show">THEATER SHOW</button>
+        <button class="filter-button" data-filter="Event">SPECIAL EVENT</button>
+      </div>
+
+      <div class="loading-state" id="loadingState">
+        <div class="loader"></div>
+        <p>Memuat data jadwal dari server...</p>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid">
+        <!-- Schedule cards will be injected here by JS -->
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">📅</div>
+        <h3>Tidak ada jadwal di kategori ini</h3>
+        <p>Nantikan pengumuman selanjutnya dari SBI48!</p>
       </div>
     </section>
-
-    <!-- SCHEDULE TIMELINE -->
-    <section class="schedule-section">
-      <div id="schedule-container" class="schedule-container"></div>
-      <div id="empty-state" class="empty-state" style="display: none;">
-        <div class="empty-icon"></div>
-        <h3>Tidak ada jadwal</h3>
-        <p>Coba ubah filter bulan atau kategori.</p>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ===== SHOW DETAIL MODAL ===== -->
-  <div id="show-modal" class="modal" aria-hidden="true">
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-card show-modal-card">
-      <button class="modal-close" data-close aria-label="Tutup modal">×</button>
-      
-      <div class="show-modal-header" id="show-modal-header">
-        <span class="show-modal-category" id="modal-category"></span>
-        <h2 id="modal-title"></h2>
-        <p class="show-modal-meta">
-          <span id="modal-date"></span>
-          <span class="meta-dot">•</span>
-          <span id="modal-time"></span>
-          <span class="meta-dot">•</span>
-          <span id="modal-venue"></span>
-        </p>
-        <p class="show-modal-desc" id="modal-desc"></p>
-      </div>
+  <!-- SCHEDULE DETAIL MODAL -->
+  <div class="modal-overlay" id="scheduleModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalEventName">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Tutup detail jadwal">✕</button>
 
-      <div class="show-modal-body">
-        <div class="lineup-header">
-          <h3>LINE-UP <span class="lineup-count" id="lineup-count">16 MEMBER</span></h3>
-          <p class="lineup-note">Klik nama member untuk melihat profil</p>
+      <div class="modal-body">
+        <div class="modal-header-info">
+          <span class="modal-type-badge" id="modalType">THEATER</span>
+          <h2 id="modalEventName">Nama Event</h2>
+          <div class="modal-meta">
+            <span class="meta-item">📅 <span id="modalDate">Date</span></span>
+            <span class="meta-item">⏰ <span id="modalTime">Time</span></span>
+            <span class="meta-item">📍 <span id="modalLocation">Location</span></span>
+            <span class="meta-item">👥 <span id="modalTeam">Team</span></span>
+          </div>
         </div>
-        <div id="lineup-grid" class="lineup-grid"></div>
+
+        <div class="lineup-section">
+          <h3 class="lineup-title">✦ LINEUP PERTUNJUKAN ✦</h3>
+          <p class="lineup-subtitle">Klik pada member untuk melihat profil lengkap.</p>
+          <div class="lineup-grid" id="modalLineupGrid">
+            <!-- Member cards injected here -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-main">
-      <div class="footer-brand-col">
-        <div class="footer-logo">
-          <span class="brand-mark">SBI</span><span class="brand-number">48</span>
-        </div>
-        <p class="footer-tagline">Super Boy Indonesia 48<br>The One and Only Male Overseas 48 Group</p>
-      </div>
-      <div class="footer-links-col">
-        <h4>NAVIGASI</h4>
-        <a href="home.html">Beranda</a>
-        <a href="members.html">Members</a>
-        <a href="schedule.html">Jadwal</a>
-        <a href="theater.html">Theater</a>
-        <a href="discography.html">Diskografi</a>
-        <a href="about.html">Tentang</a>
-      </div>
-      <div class="footer-social-col">
-        <h4>IKUTI KAMI</h4>
-        <div class="footer-socials">
-          <a href="#" class="social-btn">Instagram</a>
-          <a href="#" class="social-btn">X / Twitter</a>
-          <a href="#" class="social-btn">YouTube</a>
-          <a href="#" class="social-btn">TikTok</a>
-        </div>
-      </div>
+    <a class="logo" href="home.html" aria-label="SBI48 homepage">
+      <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
+    </a>
+    <p class="footer-tagline">THE IDOLS YOU CAN MEET.</p>
+    <div class="footer-nav">
+      <a href="members.html">MEMBERS</a>
+      <a href="history.html">HISTORY</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="diskografi.html">DISCOGRAPHY</a>
+      <a href="teater.html">THEATER</a>
+      <a href="fanclub.html">FANCLUB</a>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 SBI48 OFFICIAL WEBSITE</span>
-      <span>MADE FOR THE IDOLS YOU CAN MEET.</span>
-    </div>
+    <small>&copy; <span id="year"></span> SBI48 &middot; NEXTERA STUDIOS. All Rights Reserved.</small>
   </footer>
 
-  <script src="schedule.js"></script>
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas">↑</button>
 </body>
 </html>

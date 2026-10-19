@@ -521,4 +521,22 @@ document.addEventListener("DOMContentLoaded", () => {
   toTop?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   });
+
+    // ===== AUTO-OPEN MEMBER MODAL FROM URL PARAM (Deep Linking) =====
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchName = urlParams.get("search");
+  
+  if (searchName) {
+    // Tunggu sebentar agar grid selesai di-render
+    setTimeout(() => {
+      const targetIndex = currentFilteredMembers.findIndex(m => m.name.toLowerCase() === searchName.toLowerCase());
+      if (targetIndex !== -1) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        openModal(targetIndex);
+        
+        // Bersihkan URL agar tidak terbuka lagi saat refresh
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }, 600);
+  }
 });

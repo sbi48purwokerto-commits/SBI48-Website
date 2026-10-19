@@ -1,16 +1,20 @@
-/* =========================================
-   1. DATA MEMBER (untuk line-up)
-   ========================================= */
+/* ========================================
+   SBI48 — SCHEDULE INTERACTIVE EXPERIENCE
+   Features: Date-Grouped Cards, Strict Team Pool, 
+             1-Center Logic, Deterministic Random
+======================================== */
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTXSO4F0RGtG62vXas3tz2Y5yuxK5v-4B9zvglhinBDq7IK-a-xZo2-ZMakdgOHwNM_ScpwpCa0bHs/pub?output=csv";
+
+// Database Member
 const membersData = [
-  // SIII
-  { name: "Radhiya Wira Sakti", team: "SIII", image: null },
+  { name: "Radhiya Wira Sakti", team: "SIII", image: "Radhiya_SIII.png" },
+  { name: "Adrian Bagus Pramudya", team: "SIII", image: "Adrian_SIII.png" },
   { name: "Akbar Firmansyah Putra Daryono", team: "SIII", image: "Akbar_SIII.png" },
-  { name: "Adrian Bagus Pramudya", team: "SIII", image: null },
   { name: "Arief Rahman Hakim", team: "SIII", image: null },
   { name: "Bima Satya Nugroho", team: "SIII", image: null },
   { name: "Dimas Arya Putranto", team: "SIII", image: null },
   { name: "Endang Suhendar", team: "SIII", image: "Endang_SIII.png" },
-  { name: "Hariz Abdullah Saputra", team: ["SIII", "BIV", "I"], image: null },
   { name: "Ilman Arya Fathurrahman", team: "SIII", image: null },
   { name: "Iqbal Nur Fathurrahman", team: "SIII", image: null },
   { name: "Jendra Prasetyo Wibowo", team: "SIII", image: "Jendra_SIII.png" },
@@ -21,9 +25,9 @@ const membersData = [
   { name: "Muhammad Arkan Pradipta", team: "SIII", image: "Arkan_SIII.png" },
   { name: "Rendy Prakoso Utama", team: "SIII", image: null },
   { name: "Syafril Firman Syah", team: "SIII", image: "Syafril_SIII.png" },
-  { name: "Taufik Hidayat Nugroho", team: "SIII", image: null },
+  { name: "Taufik Hidayat Nugroho", team: "SIII", image: "Taufik_SIII.png" },
   { name: "Yudha Pramana Putra", team: "SIII", image: "Yudha_SIII.png" },
-  // BIV
+  { name: "Muhammad Zaki Zulfikar", team: "BIV", image: "MZ_BIV.png" },
   { name: "Bagas Mahendra Putra", team: "BIV", image: null },
   { name: "Daffa Rizky Ramadhan", team: "BIV", image: null },
   { name: "Dewa Guntur Saputra", team: "BIV", image: null },
@@ -38,15 +42,13 @@ const membersData = [
   { name: "Khalid Naufal Hakim", team: "BIV", image: null },
   { name: "Luthfi Arkan Prasetyo", team: "BIV", image: null },
   { name: "Muhammad Ilham Setiawan", team: "BIV", image: null },
-  { name: "Muhammad Zaki Zulfikar", team: "BIV", image: "MZ_BIV.png" },
   { name: "Rafiq Alamsyah Putra", team: "BIV", image: null },
   { name: "Rizal Bagus Permana", team: "BIV", image: null },
   { name: "Rizky Aditya Pratama", team: "BIV", image: "Rizky_BIV.png" },
   { name: "Yoga Pratama Wicaksana", team: "BIV", image: null },
   { name: "Yusuf Nabil Ardiansyah", team: "BIV", image: null },
-  // I
   { name: "Jaka Ginata Putra", team: "I", image: null },
-  { name: "Aditya Fauzan Nugraha", team: "I", image: "Adit F_I.png" },
+  { name: "Aditya Fauzan Nugraha", team: "I", image: "Aditya F_I.png" },
   { name: "Aditya Prama Wicaksana", team: "I", image: "Aditya P_I.png" },
   { name: "Ahmad Farel Ramadhan", team: "I", image: null },
   { name: "Alvin Prakoso Wijanarko", team: "I", image: null },
@@ -64,7 +66,6 @@ const membersData = [
   { name: "Surya Adi Wicaksono", team: "I", image: null },
   { name: "Syahrul Fikri Ananta", team: "I", image: null },
   { name: "Zidan Farrel Alamsyah", team: "I", image: null },
-  // GEN7
   { name: "Adnan Rizky Pramudya", team: "GEN7", image: null },
   { name: "Aksa Bintang Mahesa", team: "GEN7", image: null },
   { name: "Althaf Zidan Prakoso", team: "GEN7", image: null },
@@ -83,632 +84,382 @@ const membersData = [
   { name: "Zaky Firdaus Nugraha", team: "GEN7", image: null }
 ];
 
-/* =========================================
-   2. DATA SHOW SEPTEMBER 2026
-   ========================================= */
-const showDatabase = [
-  // 3 September (Kamis)
-  {
-    id: "2026-09-03-siii",
-    date: "2026-09-03",
-    day: "Kamis",
-    dayNum: 3,
-    title: "Tunas di Balik Seragam",
-    team: "SIII",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Setlist spesial Team SIII dengan kostum seragam sekolah."
-  },
-  // 4 September (Jumat)
-  {
-    id: "2026-09-04-sbi48",
-    date: "2026-09-04",
-    day: "Jumat",
-    dayNum: 4,
-    title: "Road To Unity: Before the Serayu",
-    team: "SBI48",
-    category: "show",
-    time: "19:30 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Show kolaborasi seluruh member SBI48 menuju era Unity."
-  },
-  // 5 September (Sabtu) - 2 show
-  {
-    id: "2026-09-05-gen7-1",
-    date: "2026-09-05",
-    day: "Sabtu",
-    dayNum: 5,
-    title: "Pajama Drive",
-    team: "GEN7",
-    category: "show",
-    time: "14:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Show santai Trainee Generasi 7 dengan tema pajama."
-  },
-  {
-    id: "2026-09-05-biv",
-    date: "2026-09-05",
-    day: "Sabtu",
-    dayNum: 5,
-    title: "Saka Agari",
-    team: "BIV",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Setlist enerjik Team BIV dengan koreografi dinamis."
-  },
-  // 6 September (Minggu)
-  {
-    id: "2026-09-06-i",
-    date: "2026-09-06",
-    day: "Minggu",
-    dayNum: 6,
-    title: "Fajar Sang Idola",
-    team: "I",
-    category: "show",
-    time: "15:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Show pagi Team I dengan suasana hangat dan intimate."
-  },
-  // 10 September (Kamis)
-  {
-    id: "2026-09-10-siii",
-    date: "2026-09-10",
-    day: "Kamis",
-    dayNum: 10,
-    title: "Tunas di Balik Seragam",
-    team: "SIII",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Pertunjukan kedua setlist Tunas di Balik Seragam bulan ini."
-  },
-  // 11 September (Jumat)
-  {
-    id: "2026-09-11-biv",
-    date: "2026-09-11",
-    day: "Jumat",
-    dayNum: 11,
-    title: "Saka Agari",
-    team: "BIV",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Saka Agari dengan line-up berbeda dari minggu lalu."
-  },
-  // 12 September (Sabtu) - 2 show
-  {
-    id: "2026-09-12-i-1",
-    date: "2026-09-12",
-    day: "Sabtu",
-    dayNum: 12,
-    title: "Fajar Sang Idola",
-    team: "I",
-    category: "show",
-    time: "14:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Fajar Sang Idola edisi Sabtu siang."
-  },
-  {
-    id: "2026-09-12-sbi48",
-    date: "2026-09-12",
-    day: "Sabtu",
-    dayNum: 12,
-    title: "Road To Unity: Before the Serayu",
-    team: "SBI48",
-    category: "show",
-    time: "19:30 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Road To Unity edisi Sabtu malam dengan guest surprise."
-  },
-  // 13 September (Minggu) - ada event
-  {
-    id: "2026-09-13-event",
-    date: "2026-09-13",
-    day: "Minggu",
-    dayNum: 13,
-    title: "SBI48 Handshake Event",
-    team: "SBI48",
-    category: "event",
-    time: "10:00 - 16:00 WIB",
-    venue: "Rita Supermall Purwokerto",
-    desc: "Event jabat tangan dengan member SBI48. Dapatkan tiket via fanclub."
-  },
-  {
-    id: "2026-09-13-gen7",
-    date: "2026-09-13",
-    day: "Minggu",
-    dayNum: 13,
-    title: "Pajama Drive",
-    team: "GEN7",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Pajama Drive malam Minggu bersama Trainee Gen 7."
-  },
-  // 17 September (Kamis)
-  {
-    id: "2026-09-17-biv",
-    date: "2026-09-17",
-    day: "Kamis",
-    dayNum: 17,
-    title: "Saka Agari",
-    team: "BIV",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Saka Agari dengan formasi terbaru."
-  },
-  // 18 September (Jumat)
-  {
-    id: "2026-09-18-siii",
-    date: "2026-09-18",
-    day: "Jumat",
-    dayNum: 18,
-    title: "Tunas di Balik Seragam",
-    team: "SIII",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Pertunjukan ketiga Tunas di Balik Seragam."
-  },
-  // 19 September (Sabtu) - 2 show
-  {
-    id: "2026-09-19-i",
-    date: "2026-09-19",
-    day: "Sabtu",
-    dayNum: 19,
-    title: "Fajar Sang Idola",
-    team: "I",
-    category: "show",
-    time: "14:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Fajar Sang Idola dengan unit song spesial."
-  },
-  {
-    id: "2026-09-19-sbi48",
-    date: "2026-09-19",
-    day: "Sabtu",
-    dayNum: 19,
-    title: "Road To Unity: Before the Serayu",
-    team: "SBI48",
-    category: "show",
-    time: "19:30 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Road To Unity edisi akhir September."
-  },
-  // 20 September (Minggu)
-  {
-    id: "2026-09-20-gen7",
-    date: "2026-09-20",
-    day: "Minggu",
-    dayNum: 20,
-    title: "Pajama Drive",
-    team: "GEN7",
-    category: "show",
-    time: "15:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Pajama Drive edisi Minggu sore."
-  },
-  // 24 September (Kamis)
-  {
-    id: "2026-09-24-i",
-    date: "2026-09-24",
-    day: "Kamis",
-    dayNum: 24,
-    title: "Fajar Sang Idola",
-    team: "I",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Fajar Sang Idola malam Kamis."
-  },
-  // 25 September (Jumat)
-  {
-    id: "2026-09-25-biv",
-    date: "2026-09-25",
-    day: "Jumat",
-    dayNum: 25,
-    title: "Saka Agari",
-    team: "BIV",
-    category: "show",
-    time: "19:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Saka Agari edisi Jumat malam."
-  },
-  // 26 September (Sabtu) - 2 show
-  {
-    id: "2026-09-26-siii",
-    date: "2026-09-26",
-    day: "Sabtu",
-    dayNum: 26,
-    title: "Tunas di Balik Seragam",
-    team: "SIII",
-    category: "show",
-    time: "14:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Tunas di Balik Seragam edisi Sabtu siang."
-  },
-  {
-    id: "2026-09-26-sbi48",
-    date: "2026-09-26",
-    day: "Sabtu",
-    dayNum: 26,
-    title: "Road To Unity: Before the Serayu",
-    team: "SBI48",
-    category: "show",
-    time: "19:30 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Road To Unity edisi spesial akhir September."
-  },
-  // 27 September (Minggu)
-  {
-    id: "2026-09-27-gen7",
-    date: "2026-09-27",
-    day: "Minggu",
-    dayNum: 27,
-    title: "Pajama Drive",
-    team: "GEN7",
-    category: "show",
-    time: "15:00 WIB",
-    venue: "SBI48 Theater · Purwokerto",
-    desc: "Pajama Drive penutup September untuk Trainee."
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-/* =========================================
-   3. SEEDED RANDOM & LINEUP GENERATOR
-   ========================================= */
-// Seeded random agar line-up konsisten per show
-function seededRandom(seed) {
-  let x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const isMobile = window.matchMedia("(max-width: 850px)").matches;
 
-function shuffleWithSeed(arr, seed) {
-  const result = [...arr];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(seededRandom(seed + i * 7 + 13) * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
+  let currentFilter = "ALL";
+  let groupedData = []; // Format: [{ date: "25 Okt 2026", events: [...] }, ...]
 
-// Cek apakah member ada di tim tertentu
-const isInTeam = (member, teamName) => {
-  return Array.isArray(member.team) ? member.team.includes(teamName) : member.team === teamName;
-};
-
-// Generate line-up 16 member dengan blocking rules
-function generateLineup(show) {
-  const seed = show.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
-  let pool = [];
-  let mandatory = [];
-  let forbiddenPairs = [];
-  let forbiddenTogether = [];
-
-  if (show.team === "SIII") {
-    pool = membersData.filter(m => isInTeam(m, "SIII"));
-    // Akbar & Julio tidak boleh 1 show
-    forbiddenPairs.push(["Akbar Firmansyah Putra Daryono", "Julio Triwira Frediyanto"]);
-  } else if (show.team === "BIV") {
-    pool = membersData.filter(m => isInTeam(m, "BIV"));
-    // Galih & Zaki tidak boleh 1 show
-    forbiddenPairs.push(["Galih Ginata Putra", "Muhammad Zaki Zulfikar"]);
-  } else if (show.team === "I") {
-    pool = membersData.filter(m => isInTeam(m, "I"));
-    // Aditya Fauzan wajib ada
-    mandatory = ["Aditya Fauzan Nugraha"];
-  } else if (show.team === "GEN7") {
-    pool = membersData.filter(m => m.team === "GEN7");
-  } else if (show.team === "SBI48") {
-    // Road To Unity: gabungan semua tim reguler
-    pool = membersData.filter(m => m.team !== "GEN7" || isInTeam(m, "SIII") || isInTeam(m, "BIV") || isInTeam(m, "I"));
-    pool = membersData.filter(m => isInTeam(m, "SIII") || isInTeam(m, "BIV") || isInTeam(m, "I"));
-    // Akbar, Galih, Aditya Fauzan harus terpisah
-    forbiddenTogether.push(["Akbar Firmansyah Putra Daryono", "Galih Ginata Putra", "Aditya Fauzan Nugraha"]);
-    // Tetap apply pair rules
-    forbiddenPairs.push(["Akbar Firmansyah Putra Daryono", "Julio Triwira Frediyanto"]);
-    forbiddenPairs.push(["Galih Ginata Putra", "Muhammad Zaki Zulfikar"]);
-    mandatory = ["Aditya Fauzan Nugraha"]; // Aditya Fauzan wajib di Road To Unity juga
-  }
-
-  // Shuffle pool
-  const shuffled = shuffleWithSeed(pool, seed);
-
-  const lineup = [];
-  const usedNames = new Set();
-
-  // Tambahkan mandatory dulu
-  mandatory.forEach(name => {
-    const member = shuffled.find(m => m.name === name);
-    if (member) {
-      lineup.push(member);
-      usedNames.add(name);
+  // ===== 1. SEEDED RANDOM =====
+  function createSeededRandom(seedStr) {
+    let hash = 0;
+    for (let i = 0; i < seedStr.length; i++) {
+      const char = seedStr.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
     }
-  });
+    let state = Math.abs(hash) || 1;
+    return function() {
+      state = (state * 1664525 + 1013904223) % 4294967296;
+      return state / 4294967296;
+    };
+  }
 
-  // Tambahkan member lain dengan cek blocking
-  for (const member of shuffled) {
-    if (lineup.length >= 16) break;
-    if (usedNames.has(member.name)) continue;
+  // ===== 2. LINEUP GENERATOR =====
+  function generateLineup(lineupInput, team, eventName, date) {
+    if (!lineupInput || lineupInput.trim() === "" || lineupInput.toLowerCase() === "kosong") {
+      return [];
+    }
 
-    // Cek forbidden pairs
-    let blocked = false;
-    for (const pair of forbiddenPairs) {
-      if (pair.includes(member.name)) {
-        const other = pair.find(n => n !== member.name);
-        if (usedNames.has(other)) {
-          blocked = true;
-          break;
+    const cleanTeam = team.trim().toUpperCase();
+    let pool = [];
+    if (cleanTeam.includes("SIII")) pool = membersData.filter(m => m.team === "SIII");
+    else if (cleanTeam.includes("BIV")) pool = membersData.filter(m => m.team === "BIV");
+    else if (cleanTeam === "I" || cleanTeam.includes("TEAM I")) pool = membersData.filter(m => m.team === "I");
+    else if (cleanTeam.includes("GEN7") || cleanTeam.includes("TRAINEE")) pool = membersData.filter(m => m.team === "GEN7");
+    else pool = [...membersData];
+
+    if (pool.length === 0) pool = [...membersData];
+
+    let lineup = [];
+    let available = [...pool];
+    let centerMember = null;
+    const targetCount = 16;
+
+    const names = lineupInput.split(",").map(n => n.trim());
+    for (let name of names) {
+      let isCenter = name.toUpperCase().includes("(C)") || name.toUpperCase().includes("(CENTER)");
+      let cleanName = name.replace(/\(C\)|\(CENTER\)/gi, "").trim();
+
+      let member = available.find(m => m.name.toLowerCase().includes(cleanName.toLowerCase()));
+      if (member) {
+        if (isCenter) {
+          centerMember = { ...member, isCenter: true };
+        } else {
+          lineup.push({ ...member, isCenter: false });
         }
+        available = available.filter(m => m.name !== member.name);
       }
     }
-    if (blocked) continue;
 
-    // Cek forbidden together (untuk Road To Unity)
-    for (const group of forbiddenTogether) {
-      if (group.includes(member.name)) {
-        const othersInGroup = group.filter(n => n !== member.name);
-        const othersPresent = othersInGroup.filter(n => usedNames.has(n));
-        if (othersPresent.length > 0) {
-          blocked = true;
-          break;
+    const seedStr = `${eventName}-${date}-${cleanTeam}`;
+    const seededRandom = createSeededRandom(seedStr);
+
+    while ((lineup.length + (centerMember ? 1 : 0)) < targetCount && available.length > 0) {
+      const randIdx = Math.floor(seededRandom() * available.length);
+      lineup.push({ ...available[randIdx], isCenter: false });
+      available.splice(randIdx, 1);
+    }
+
+    return centerMember ? [centerMember, ...lineup] : lineup;
+  }
+
+  // ===== 3. FETCH & GROUP BY DATE =====
+  function fetchSchedule() {
+    Papa.parse(SHEET_URL, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        const allEvents = results.data.map(row => ({
+          date: row["Tanggal"] || row["Date"] || "",
+          time: row["Waktu"] || row["Time"] || "",
+          eventName: row["Nama Event"] || row["Event Name"] || "Untitled Event",
+          team: row["Team"] || "TBA",
+          location: row["Lokasi"] || row["Location"] || "TBA",
+          type: row["Tipe"] || row["Type"] || "Event",
+          lineupInput: row["Lineup"] || ""
+        }));
+
+        // Group by date
+        const groupMap = new Map();
+        allEvents.forEach(event => {
+          const key = event.date;
+          if (!groupMap.has(key)) groupMap.set(key, []);
+          groupMap.get(key).push(event);
+        });
+
+        // Sort each group by time, then sort groups by date
+        groupedData = Array.from(groupMap.entries()).map(([date, events]) => {
+          events.sort((a, b) => {
+            const timeA = a.time || "99:99";
+            const timeB = b.time || "99:99";
+            return timeA.localeCompare(timeB);
+          });
+          return { date, events };
+        });
+
+        // Sort dates chronologically
+        groupedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        $("#loadingState").style.display = "none";
+        renderSchedule();
+      },
+      error: function(err) {
+        console.error("Error parsing CSV:", err);
+        $("#loadingState").innerHTML = `<p style="color: var(--pink);">Gagal memuat data. Pastikan link "Publish to Web" CSV sudah benar.</p>`;
+      }
+    });
+  }
+
+  // ===== 4. RENDER GROUPED CARDS =====
+  function renderSchedule() {
+    const grid = $("#scheduleGrid");
+    grid.innerHTML = "";
+
+    // Filter events inside each group
+    const filteredGroups = groupedData.map(group => {
+      const filteredEvents = currentFilter === "ALL"
+        ? group.events
+        : group.events.filter(e => e.type.toLowerCase() === currentFilter.toLowerCase());
+      return { date: group.date, events: filteredEvents };
+    }).filter(group => group.events.length > 0); // Hide empty date groups
+
+    if (filteredGroups.length === 0) {
+      $("#emptyState").style.display = "block";
+      return;
+    }
+    $("#emptyState").style.display = "none";
+
+    filteredGroups.forEach((group, index) => {
+      const card = document.createElement("div");
+      // Determine card type class based on events
+      const types = [...new Set(group.events.map(e => e.type))];
+      const cardTypeClass = types.length === 1 ? `type-${types[0]}` : "type-mixed";
+      card.className = `schedule-card ${cardTypeClass} reveal`;
+      card.style.transitionDelay = `${index * 0.05}s`;
+
+      const dateParts = group.date.split(" ");
+      const day = dateParts[0] || "?";
+      const month = dateParts[1] || "";
+
+      // Type badge
+      let typeBadgeHTML = "";
+      if (types.length === 1) {
+        typeBadgeHTML = `<span class="card-type">${types[0].toUpperCase()}</span>`;
+      } else {
+        typeBadgeHTML = `<span class="card-type multi">MULTI SHOW</span>`;
+      }
+
+      // Event count indicator
+      const eventCount = group.events.length;
+      const countBadge = eventCount > 1 
+        ? `<span class="event-count-badge">${eventCount} SHOWS</span>` 
+        : "";
+
+      // Build events list HTML
+      const eventsListHTML = group.events.map((event, idx) => {
+        let lineupPreview = "TBA";
+        if (event.lineupInput && event.lineupInput.trim() !== "") {
+          if (event.lineupInput.toLowerCase() === "random" || event.lineupInput.toLowerCase() === "acak") {
+            lineupPreview = `16 Member ${event.team} (Acak)`;
+          } else {
+            lineupPreview = event.lineupInput;
+          }
+        } else {
+          lineupPreview = "Belum diumumkan";
         }
-      }
-    }
-    if (blocked) continue;
 
-    lineup.push(member);
-    usedNames.add(member.name);
-  }
+        return `
+          <div class="event-item" data-event-index="${idx}" data-date="${group.date}">
+            <div class="event-time">${event.time || "--:--"}</div>
+            <div class="event-details">
+              <h4 class="event-name">${event.eventName}</h4>
+              <div class="event-meta">
+                <span>📍 ${event.location}</span>
+                <span>👥 ${event.team}</span>
+              </div>
+              <div class="event-lineup-preview">🎤 ${lineupPreview}</div>
+            </div>
+            <span class="event-arrow">→</span>
+          </div>
+        `;
+      }).join("");
 
-  // Jika belum 16, tambahkan dari pool yang tersisa (abaikan blocking)
-  if (lineup.length < 16) {
-    for (const member of shuffled) {
-      if (lineup.length >= 16) break;
-      if (!usedNames.has(member.name)) {
-        lineup.push(member);
-        usedNames.add(member.name);
-      }
-    }
-  }
-
-  return lineup.slice(0, 16);
-}
-
-// Cache line-up agar konsisten
-const lineupCache = {};
-function getLineup(show) {
-  if (!lineupCache[show.id]) {
-    lineupCache[show.id] = generateLineup(show);
-  }
-  return lineupCache[show.id];
-}
-
-/* =========================================
-   4. STATE & DOM
-   ========================================= */
-let currentCategory = "all";
-let currentYear = 2026;
-let currentMonth = 8; // September (0-indexed)
-
-const scheduleContainer = document.getElementById("schedule-container");
-const emptyState = document.getElementById("empty-state");
-const showModal = document.getElementById("show-modal");
-
-/* =========================================
-   5. RENDER SCHEDULE
-   ========================================= */
-function renderSchedule() {
-  // Filter shows
-  let shows = showDatabase.filter(s => {
-    const d = new Date(s.date);
-    return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
-  });
-
-  if (currentCategory !== "all") {
-    shows = shows.filter(s => s.category === currentCategory);
-  }
-
-  // Sort by date then time
-  shows.sort((a, b) => {
-    if (a.date !== b.date) return a.date.localeCompare(b.date);
-    return a.time.localeCompare(b.time);
-  });
-
-  if (shows.length === 0) {
-    scheduleContainer.innerHTML = "";
-    emptyState.style.display = "block";
-    return;
-  }
-
-  emptyState.style.display = "none";
-
-  // Group by day
-  const grouped = {};
-  shows.forEach(s => {
-    if (!grouped[s.date]) grouped[s.date] = [];
-    grouped[s.date].push(s);
-  });
-
-  const html = Object.keys(grouped).map(date => {
-    const dayShows = grouped[date];
-    const first = dayShows[0];
-    const d = new Date(date);
-    const dayName = first.day;
-
-    return `
-      <div class="day-group" data-animate="fade-up">
-        <div class="day-marker">
-          <div class="day-number">${d.getDate()}</div>
-          <div class="day-name">${dayName}</div>
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-date-badge">
+            <div class="day">${day}</div>
+            <div class="month">${month}</div>
+            ${countBadge}
+          </div>
+          ${typeBadgeHTML}
         </div>
-        <div class="day-divider"></div>
-        ${dayShows.map(show => renderShowCard(show)).join("")}
-      </div>
-    `;
-  }).join("");
+        <div class="card-body events-list">
+          ${eventsListHTML}
+        </div>
+      `;
 
-  scheduleContainer.innerHTML = html;
+      // 3D Tilt on card
+      if (finePointer && !reduceMotion) {
+        card.addEventListener("pointermove", e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(800px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateY(-6px)`;
+        });
+        card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+      }
 
-  // Attach click events
-  document.querySelectorAll(".show-card").forEach(card => {
-    card.addEventListener("click", () => {
-      openShowModal(card.dataset.showId);
+      // Click on individual event-item
+      card.querySelectorAll(".event-item").forEach(item => {
+        item.addEventListener("click", e => {
+          e.stopPropagation();
+          const dateKey = item.dataset.date;
+          const eventIdx = parseInt(item.dataset.eventIndex);
+          const targetGroup = groupedData.find(g => g.date === dateKey);
+          if (targetGroup && targetGroup.events[eventIdx]) {
+            openModal(targetGroup.events[eventIdx]);
+          }
+        });
+      });
+
+      grid.appendChild(card);
+    });
+
+    observeReveals();
+  }
+
+  // ===== 5. MODAL LOGIC =====
+  const modal = $("#scheduleModal");
+  const modalClose = $("#modalClose");
+  const modalBackdrop = $("#modalBackdrop");
+
+  function openModal(item) {
+    $("#modalType").textContent = item.type.toUpperCase();
+    $("#modalType").className = `modal-type-badge ${item.type}`;
+    $("#modalEventName").textContent = item.eventName;
+    $("#modalDate").textContent = item.date;
+    $("#modalTime").textContent = item.time;
+    $("#modalLocation").textContent = item.location;
+    $("#modalTeam").textContent = item.team;
+
+    const lineup = generateLineup(item.lineupInput, item.team, item.eventName, item.date);
+    const lineupGrid = $("#modalLineupGrid");
+    lineupGrid.innerHTML = "";
+
+    if (lineup.length === 0) {
+      lineupGrid.innerHTML = `<p style="grid-column: 1/-1; color: var(--muted); font-style: italic; text-align: center; padding: 20px;">Lineup akan diumumkan segera.</p>`;
+    } else {
+      lineup.forEach(member => {
+        const memberEl = document.createElement("div");
+        memberEl.className = `lineup-member ${member.isCenter ? 'is-center' : ''}`;
+        
+        const initials = member.name.split(" ").map(n => n[0]).slice(0, 2).join("").toUpperCase();
+        const imgHTML = member.image 
+          ? `<img src="${member.image}" alt="${member.name}" class="member-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+             <div class="member-fallback" style="display:none">${initials}</div>`
+          : `<div class="member-fallback">${initials}</div>`;
+
+        const centerBadge = member.isCenter ? `<div class="center-badge">CENTER</div>` : '';
+
+        memberEl.innerHTML = `
+          ${centerBadge}
+          ${imgHTML}
+          <div class="member-name">${member.name.split(" ")[0]}</div>
+          <div class="member-team">${member.team}</div>
+        `;
+
+        memberEl.addEventListener("click", () => {
+          window.location.href = `members.html?search=${encodeURIComponent(member.name)}`;
+        });
+
+        lineupGrid.appendChild(memberEl);
+      });
+    }
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  modalClose.addEventListener("click", closeModal);
+  modalBackdrop.addEventListener("click", closeModal);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("active")) closeModal(); });
+
+  // ===== 6. FILTER HANDLERS =====
+  $$(".filter-button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $$(".filter-button").forEach(b => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+      currentFilter = btn.dataset.filter;
+      renderSchedule();
     });
   });
 
-  // Trigger animations
-  document.querySelectorAll('[data-animate]').forEach(el => {
-    el.classList.add('is-visible');
-  });
-}
+  // ===== 7. GLOBAL EFFECTS =====
+  const glow = $("#cursorGlow");
+  if (finePointer && !reduceMotion) {
+    window.addEventListener("pointermove", e => {
+      if (glow) { glow.style.left = `${e.clientX}px`; glow.style.top = `${e.clientY}px`; }
+    }, { passive: true });
 
-function renderShowCard(show) {
-  const teamClass = `team-${show.team.toLowerCase()}`;
-  const catClass = show.category;
-  const catLabel = show.category === "show" ? "SHOW" : "EVENT";
-
-  return `
-    <div class="show-card ${teamClass}" data-show-id="${show.id}">
-      <div class="show-time">${show.time}</div>
-      <div class="show-info">
-        <span class="show-category-tag ${catClass}">${catLabel}</span>
-        <h3 class="show-title">${show.title}</h3>
-        <div class="show-team">Team ${show.team === "SBI48" ? "SBI48 (Gabungan)" : show.team === "GEN7" ? "Trainee Gen 7" : show.team}</div>
-        <div class="show-venue">📍 ${show.venue}</div>
-      </div>
-      <button class="show-cta">DETAIL →</button>
-    </div>
-  `;
-}
-
-/* =========================================
-   6. SHOW MODAL
-   ========================================= */
-function openShowModal(showId) {
-  const show = showDatabase.find(s => s.id === showId);
-  if (!show) return;
-
-  const lineup = getLineup(show);
-
-  // Header info
-  document.getElementById("modal-category").textContent = show.category.toUpperCase();
-  document.getElementById("modal-title").textContent = show.title;
-  document.getElementById("modal-date").textContent = `${show.day}, ${show.dayNum} September 2026`;
-  document.getElementById("modal-time").textContent = show.time;
-  document.getElementById("modal-venue").textContent = show.venue;
-  document.getElementById("modal-desc").textContent = show.desc;
-  document.getElementById("lineup-count").textContent = `${lineup.length} MEMBER`;
-
-  // Render lineup grid
-  const lineupGrid = document.getElementById("lineup-grid");
-  lineupGrid.innerHTML = lineup.map(member => {
-    const primaryTeam = Array.isArray(member.team) ? member.team[0] : member.team;
-    const teamClass = primaryTeam.toLowerCase();
-    const teamLabel = primaryTeam === "GEN7" ? "TRAINEE" : primaryTeam;
-
-    return `
-      <a href="members.html?focus=${encodeURIComponent(member.name)}" class="lineup-member">
-        <div class="lineup-photo ${member.image ? 'has-image' : ''}">
-          ${member.image 
-            ? `<img src="${member.image}" alt="${member.name}" loading="lazy">`
-            : `<span class="placeholder-icon">✦</span>`
-          }
-        </div>
-        <div class="lineup-info">
-          <div class="lineup-name">${member.name}</div>
-          <span class="lineup-team-badge ${teamClass}">${teamLabel}</span>
-        </div>
-      </a>
-    `;
-  }).join("");
-
-  showModal.classList.add("open");
-  showModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function closeShowModal() {
-  showModal.classList.remove("open");
-  showModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-/* =========================================
-   7. SIDEBAR
-   ========================================= */
-const menuBtn = document.getElementById('menu-btn');
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
-const sidebarClose = document.getElementById('sidebar-close');
-
-function openSidebar() {
-  sidebar.classList.add('open');
-  sidebarOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeSidebar() {
-  sidebar.classList.remove('open');
-  sidebarOverlay.classList.remove('open');
-  if (!showModal.classList.contains('open')) {
-    document.body.style.overflow = '';
+    document.addEventListener("click", e => {
+      const burstCount = 8;
+      for (let i = 0; i < burstCount; i++) {
+        const burst = document.createElement("span");
+        burst.className = "click-burst";
+        const angle = (i / burstCount) * Math.PI * 2;
+        const velocity = 30 + Math.random() * 30;
+        burst.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px; background: ${Math.random() > 0.5 ? "var(--cyan)" : "var(--pink)"}; --tx: ${Math.cos(angle) * velocity}px; --ty: ${Math.sin(angle) * velocity}px;`;
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 800);
+      }
+    });
   }
-}
 
-menuBtn.addEventListener('click', openSidebar);
-sidebarClose.addEventListener('click', closeSidebar);
-sidebarOverlay.addEventListener('click', closeSidebar);
-document.querySelectorAll('.sidebar-link').forEach(link => link.addEventListener('click', closeSidebar));
-
-/* =========================================
-   8. FILTER EVENT LISTENERS
-   ========================================= */
-document.getElementById("year-filter").addEventListener("change", (e) => {
-  currentYear = parseInt(e.target.value);
-  renderSchedule();
-});
-
-document.getElementById("month-filter").addEventListener("change", (e) => {
-  currentMonth = parseInt(e.target.value);
-  renderSchedule();
-});
-
-document.querySelectorAll(".cat-tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".cat-tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentCategory = btn.dataset.cat;
-    renderSchedule();
-  });
-});
-
-// Modal close
-document.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", closeShowModal));
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    if (showModal.classList.contains('open')) closeShowModal();
-    else if (sidebar.classList.contains('open')) closeSidebar();
-  }
-});
-
-/* =========================================
-   9. SCROLL ANIMATIONS & INIT
-   ========================================= */
-const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-const scrollObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
+  function createSparkleField() {
+    if (reduceMotion) return;
+    const layer = $("#sparkleLayer");
+    if (!layer) return;
+    const colors = ["#ffffff", "#8ff3ff", "#b9a6ff", "#ff9bdf"];
+    for (let i = 0; i < (isMobile ? 30 : 60); i++) {
+      const sparkle = document.createElement("span");
+      sparkle.className = (i % 7 === 0) ? "sparkle star" : "sparkle";
+      if (i % 7 === 0) sparkle.textContent = "✦";
+      sparkle.style.setProperty("--spark-x", `${(Math.random() * 98 + 1)}%`);
+      sparkle.style.setProperty("--spark-y", `${(Math.random() * 94 + 3)}%`);
+      sparkle.style.setProperty("--spark-size", (i % 7 === 0) ? `${9 + Math.random() * 6}px` : `${2 + Math.random() * 2}px`);
+      sparkle.style.setProperty("--spark-color", colors[Math.floor(Math.random() * colors.length)]);
+      sparkle.style.setProperty("--spark-duration", `${2 + Math.random() * 3}s`);
+      sparkle.style.setProperty("--spark-delay", `${Math.random() * 5}s`);
+      layer.appendChild(sparkle);
     }
-  });
-}, observerOptions);
+  }
+  createSparkleField();
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderSchedule();
-  document.querySelectorAll('[data-animate]').forEach(el => scrollObserver.observe(el));
+  // ===== 8. SCROLL REVEAL & BACK TO TOP =====
+  function observeReveals() {
+    const revealItems = $$(".reveal");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+      revealItems.forEach(item => observer.observe(item));
+    }
+  }
+
+  const toTop = $("#toTop");
+  window.addEventListener("scroll", () => {
+    if (toTop) toTop.classList.toggle("visible", window.scrollY > 450);
+  }, { passive: true });
+  toTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  fetchSchedule();
 });
