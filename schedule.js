@@ -172,12 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ===== LINEUP GENERATOR =====
+  // ===== LINEUP GENERATOR (DENGAN FITUR EXCLUDE) =====
   function generateLineup(lineupInput, team, eventName, date) {
     const cleanTeam = (team || "").trim().toUpperCase();
     let pool = [];
     let showAllMembers = false;
 
+    // 1. Tentukan pool berdasarkan Tim
     if (cleanTeam.includes("SIII")) pool = membersData.filter(m => m.team === "SIII");
     else if (cleanTeam.includes("BIV")) pool = membersData.filter(m => m.team === "BIV");
     else if (cleanTeam === "I" || cleanTeam.includes("TEAM I")) pool = membersData.filter(m => m.team === "I");
@@ -191,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pool.length === 0) pool = [...membersData];
 
+    // 2. Cek jika lineup kosong
     const isEmptyLineup = !lineupInput || lineupInput.trim() === "" || lineupInput.toLowerCase() === "kosong";
     if (isEmptyLineup && !showAllMembers) return [];
     if (showAllMembers && isEmptyLineup) return pool.map(m => ({ ...m, isCenter: false }));
@@ -199,25 +201,49 @@ document.addEventListener("DOMContentLoaded", () => {
     let available = [...pool];
     let centerMember = null;
 
+    // 3. Proses Input Lineup (Termasuk Exclude)
     if (!isEmptyLineup) {
       const names = lineupInput.split(",").map(n => n.trim());
+      
       for (let name of names) {
+        // A. Cek apakah ini perintah EXCLUDE (diawali tanda '-' atau kata 'exclude')
+        if (name.startsWith("-") || name.toLowerCase().startsWith("exclude ")) {
+          let cleanExcludeName = name.replace(/^[-\s]+|exclude\s+/gi, "").trim();
+          let memberToExclude = pool.find(m => m.name.toLowerCase().includes(cleanExcludeName.toLowerCase()));
+          
+          if (memberToExclude) {
+            // Hapus dari pool acak agar tidak terpilih
+            available = available.filter(m => m.name !== memberToExclude.name);
+          }
+          continue; // Lanjut ke nama berikutnya
+        }
+
+        // B. Cek apakah ini CENTER
         let isCenter = name.toUpperCase().includes("(C)") || name.toUpperCase().includes("(CENTER)");
         let cleanName = name.replace(/\(C\)|\(CENTER\)/gi, "").trim();
+
         let member = available.find(m => m.name.toLowerCase().includes(cleanName.toLowerCase()));
         if (member) {
-          if (isCenter) centerMember = { ...member, isCenter: true };
-          else lineup.push({ ...member, isCenter: false });
+          if (isCenter) {
+            centerMember = { ...member, isCenter: true };
+          } else {
+            lineup.push({ ...member, isCenter: false });
+          }
+          // Hapus dari available agar tidak teracak ulang
           available = available.filter(m => m.name !== member.name);
         }
       }
     }
 
+    // 4. Jika mode "SBI48 Members" → tambahkan SEMUA sisa member
     if (showAllMembers) {
-      available.forEach(m => lineup.push({ ...m, isCenter: false }));
+      available.forEach(m => {
+        lineup.push({ ...m, isCenter: false });
+      });
       return centerMember ? [centerMember, ...lineup] : lineup;
     }
 
+    // 5. Mode Normal: Acak hingga 16 member (Deterministik / Anti-Refresh)
     const targetCount = 16;
     const seedStr = `${eventName}-${date}-${cleanTeam}`;
     const seededRandom = createSeededRandom(seedStr);
@@ -330,32 +356,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const countBadge = eventCount > 1 ? `<span class="event-count-badge">${eventCount} SHOWS</span>` : "";
 
       const eventsListHTML = group.events.map((event, idx) => {
-        let lineupPreview = "TBA";
-        if (event.lineupInput && event.lineupInput.trim() !== "") {
-          if (event.lineupInput.toLowerCase() === "random" || event.lineupInput.toLowerCase() === "acak") {
-            lineupPreview = `16 Member ${event.team} (Acak)`;
-          } else {
-            lineupPreview = event.lineupInput;
-          }
-        } else {
-          lineupPreview = "Belum diumumkan";
-        }
-
-        return `
-          <div class="event-item" data-event-index="${idx}" data-date="${group.date}">
-            <div class="event-time">${event.time || "--:--"}</div>
-            <div class="event-details">
-              <h4 class="event-name">${event.eventName}</h4>
-              <div class="event-meta">
-                <span>📍 ${event.location}</span>
-                <span>👥 ${event.team}</span>
-              </div>
-              <div class="event-lineup-preview">🎤 ${lineupPreview}</div>
-            </div>
-            <span class="event-arrow">→</span>
-          </div>
-        `;
-      }).join("");
+  return `
+    <div class="event-item" data-event-index="${idx}" data-date="${group.date}">
+      <div class="event-time">${event.time || "--:--"}</div>
+      <div class="event-details">
+        <h4 class="event-name">${event.eventName}</h4>
+        <div class="event-meta">
+          <span>📍 ${event.location}</span>
+          <span>👥 ${event.team}</span>
+        </div>
+      </div>
+      <span class="event-arrow">→</span>
+    </div>
+  `;
+}).join("");
 
       card.innerHTML = `
         <div class="card-header">
