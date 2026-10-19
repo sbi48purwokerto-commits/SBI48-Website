@@ -326,3 +326,25 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   .modal-nav-btn:first-child .nav-text, .modal-nav-btn:nth-child(3) .nav-text { display: none; }
   .modal-counter { padding: 8px 18px; font-size: 1.1rem; }
 }
+
+/* ... (Pertahankan semua CSS dasar dari sebelumnya) ... */
+
+/* ===== NEW: SPLASH LINK IN HEADER ===== */
+.splash-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .6rem !important; color: var(--violet) !important;
+  border: 1px solid rgba(155,123,255,.3); padding: 6px 12px; border-radius: 20px;
+  transition: all .3s ease; margin-right: 10px; /* Sedikit jarak dari menu lain */
+}
+.splash-link:hover {
+  background: rgba(155,123,255,.1); border-color: var(--violet); color: white !important;
+  transform: translateY(-1px); box-shadow: 0 4px 15px rgba(155,123,255,.2);
+}
+.splash-icon { 
+  font-size: .7rem; 
+  display: inline-block;
+  animation: spin 4s linear infinite; 
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ... (Sisanya tetap sama) ... */

@@ -411,21 +411,30 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
+      // Spotlight Effect Logic
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+        
+        // Subtle 3D tilt
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+
       card.addEventListener("click", () => {
         const idx = currentFilteredReleases.findIndex(r => r.id === release.id);
         openModal(idx);
       });
-
-      // 3D Tilt
-      if (finePointer && !reduceMotion) {
-        card.addEventListener("pointermove", event => {
-          const rect = card.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width - 0.5;
-          const y = (event.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `perspective(800px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg) translateY(-5px)`;
-        });
-        card.addEventListener("pointerleave", () => { card.style.transform = ""; });
-      }
 
       diskoGrid.appendChild(card);
     });
@@ -434,7 +443,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      // Ripple effect for button
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top
+      btn.style.setProperty("--x", `${x}px`);
+      btn.style.setProperty("--y", `${y}px`);
+
       filterButtons.forEach(b => b.classList.remove("is-selected"));
       btn.classList.add("is-selected");
       currentFilter = btn.dataset.filter;
