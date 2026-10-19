@@ -338,3 +338,122 @@ button { font: inherit; border: none; background: none; cursor: pointer; color: 
   .event-meta { font-size: .65rem; gap: 8px; }
   .event-lineup-preview { font-size: .65rem; }
 }
+
+/* ===== ALL MEMBERS MODE (75+ member grid) ===== */
+.lineup-grid.all-members-mode {
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 12px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.lineup-grid.all-members-mode .member-photo,
+.lineup-grid.all-members-mode .member-fallback {
+  width: 60px;
+  height: 60px;
+  font-size: 1rem;
+}
+
+.lineup-grid.all-members-mode .member-name {
+  font-size: 0.7rem;
+}
+
+.lineup-grid.all-members-mode .member-team {
+  font-size: 0.55rem;
+}
+
+/* Scrollbar untuk all-members-mode */
+.lineup-grid.all-members-mode::-webkit-scrollbar {
+  width: 6px;
+}
+.lineup-grid.all-members-mode::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.05);
+  border-radius: 3px;
+}
+.lineup-grid.all-members-mode::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  border-radius: 3px;
+}
+
+/* ===== DATE FILTER ROW (Tahun & Bulan) ===== */
+.date-filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.date-filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-filter-wrapper label {
+  font-size: .6rem;
+  font-weight: 900;
+  letter-spacing: .2em;
+  color: var(--cyan);
+  text-align: center;
+}
+
+.date-filter-wrapper .select-shell {
+  position: relative;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.date-filter-wrapper .select-shell:hover,
+.date-filter-wrapper .select-shell:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(109,225,255,.1);
+}
+
+.date-filter-wrapper select {
+  width: 100%;
+  padding: 14px 45px 14px 18px;
+  background: transparent;
+  border: none;
+  color: white;
+  font: 700 .85rem var(--display);
+  letter-spacing: .08em;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.date-filter-wrapper select option {
+  background: var(--bg);
+  color: white;
+  padding: 10px;
+}
+
+.date-filter-wrapper .select-arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--cyan);
+  font-size: .7rem;
+  transition: transform .3s;
+}
+
+.date-filter-wrapper .select-shell:focus-within .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* ===== RESPONSIVE DATE FILTER ===== */
+@media (max-width: 540px) {
+  .date-filter-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

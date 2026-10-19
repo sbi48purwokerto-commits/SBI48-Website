@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="id">
+<head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b18">
   <meta name="description" content="Jadwal pertunjukan dan event SBI48.">
@@ -7,8 +9,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Library untuk membaca CSV dengan mudah dan aman -->
+  <!-- Library untuk membaca CSV dengan mudah dan aman -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   
   <link rel="stylesheet" href="schedule.css">
@@ -24,7 +27,7 @@
   <header class="header" id="top">
     <a class="logo" href="home.html" aria-label="SBI48 homepage">
       <img src="logo.png" alt="SBI48 Official Logo" class="site-logo">
-        <span class="logo-sub">OFFICIAL WEBSITE</span>
+      <span class="logo-sub">OFFICIAL WEBSITE</span>
     </a>
 
     <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="siteNav" aria-label="Buka navigasi">
@@ -66,10 +69,45 @@
 
     <!-- FILTER & GRID SECTION -->
     <section class="schedule-section section-wrap">
+      <!-- FILTER TIPE -->
       <div class="filter-row reveal" role="group" aria-label="Filter kategori jadwal">
         <button class="filter-button is-selected" data-filter="ALL">ALL SHOWS</button>
         <button class="filter-button" data-filter="Theater Show">THEATER SHOW</button>
         <button class="filter-button" data-filter="Event">SPECIAL EVENT</button>
+      </div>
+
+      <!-- FILTER TAHUN & BULAN -->
+      <div class="date-filter-row reveal">
+        <div class="date-filter-wrapper">
+          <label for="yearFilter">TAHUN</label>
+          <div class="select-shell">
+            <select id="yearFilter" aria-label="Filter tahun">
+              <!-- Opsi tahun akan diisi otomatis oleh JavaScript -->
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="date-filter-wrapper">
+          <label for="monthFilter">BULAN</label>
+          <div class="select-shell">
+            <select id="monthFilter" aria-label="Filter bulan">
+              <option value="01">Januari</option>
+              <option value="02">Februari</option>
+              <option value="03">Maret</option>
+              <option value="04">April</option>
+              <option value="05">Mei</option>
+              <option value="06">Juni</option>
+              <option value="07">Juli</option>
+              <option value="08">Agustus</option>
+              <option value="09">September</option>
+              <option value="10">Oktober</option>
+              <option value="11">November</option>
+              <option value="12">Desember</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
       </div>
 
       <div class="loading-state" id="loadingState">

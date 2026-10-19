@@ -1,12 +1,10 @@
 /* ========================================
    SBI48 — SCHEDULE INTERACTIVE EXPERIENCE
-   Features: Date-Grouped Cards, Strict Team Pool, 
-             1-Center Logic, Deterministic Random
+   Features: Auto Current Date Default, 6 Team Options, 1-Center Logic, Deterministic Random
 ======================================== */
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTXSO4F0RGtG62vXas3tz2Y5yuxK5v-4B9zvglhinBDq7IK-a-xZo2-ZMakdgOHwNM_ScpwpCa0bHs/pub?output=csv";
 
-// Database Member
 const membersData = [
   { name: "Radhiya Wira Sakti", team: "SIII", image: "Radhiya_SIII.png" },
   { name: "Adrian Bagus Pramudya", team: "SIII", image: "Adrian_SIII.png" },
@@ -92,10 +90,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const finePointer = window.matchMedia("(pointer: fine)").matches;
   const isMobile = window.matchMedia("(max-width: 850px)").matches;
 
-  let currentFilter = "ALL";
-  let groupedData = []; // Format: [{ date: "25 Okt 2026", events: [...] }, ...]
+  // ===== AUTO-DETECT CURRENT DATE =====
+  const now = new Date();
+  const currentYear = now.getFullYear().toString();
+  const currentMonth = (now.getMonth() + 1).toString().padStart(2, '0'); // "01" to "12"
 
-  // ===== 1. SEEDED RANDOM =====
+  let currentFilter = "ALL";
+  let currentYearFilter = currentYear;   // Default ke tahun sekarang
+  let currentMonthFilter = currentMonth; // Default ke bulan sekarang
+  let groupedData = [];
+
+  // ===== HELPER: Parse Date =====
+  function parseDate(dateStr) {
+    const monthMap = {
+      "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
+      "Mei": "05", "Jun": "06", "Jul": "07", "Agu": "08", "Aug": "08",
+      "Sep": "09", "Okt": "10", "Oct": "10", "Nov": "11", "Des": "12", "Dec": "12"
+    };
+    const parts = dateStr.split(" ");
+    if (parts.length === 3) {
+      const day = parts[0].padStart(2, '0');
+      const month = monthMap[parts[1]] || "01";
+      const year = parts[2];
+      return { year, month, day, full: `${year}-${month}-${day}` };
+    }
+    if (dateStr.includes("-")) {
+      const [year, month, day] = dateStr.split("-");
+      return { year, month, day, full: dateStr };
+    }
+    return { year: "0000", month: "00", day: "00", full: dateStr };
+  }
+
+  // ===== HELPER: Seeded Random =====
   function createSeededRandom(seedStr) {
     let hash = 0;
     for (let i = 0; i < seedStr.length; i++) {
@@ -110,43 +136,89 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // ===== 2. LINEUP GENERATOR =====
-  function generateLineup(lineupInput, team, eventName, date) {
-    if (!lineupInput || lineupInput.trim() === "" || lineupInput.toLowerCase() === "kosong") {
-      return [];
-    }
+  // ===== HELPER: Populate Year Filter =====
+  function populateYearFilter(data) {
+    const yearSelect = $("#yearFilter");
+    if (!yearSelect) return;
 
-    const cleanTeam = team.trim().toUpperCase();
+    const years = new Set();
+    data.forEach(group => {
+      const parsed = parseDate(group.date);
+      if (parsed.year !== "0000") years.add(parsed.year);
+    });
+
+    // Pastikan tahun sekarang selalu ada di daftar, meski belum ada event
+    years.add(currentYear);
+
+    const sortedYears = Array.from(years).sort(); // Urut dari terlama ke terbaru
+
+    yearSelect.innerHTML = ''; // Kosongkan dulu
+    sortedYears.forEach(year => {
+      const option = document.createElement("option");
+      option.value = year;
+      option.textContent = year;
+      if (year === currentYear) {
+        option.selected = true; // Set default ke tahun sekarang
+      }
+      yearSelect.appendChild(option);
+    });
+  }
+
+  // ===== HELPER: Set Default Month =====
+  function setDefaultMonth() {
+    const monthSelect = $("#monthFilter");
+    if (monthSelect) {
+      monthSelect.value = currentMonth; // Set default ke bulan sekarang
+    }
+  }
+
+  // ===== LINEUP GENERATOR =====
+  function generateLineup(lineupInput, team, eventName, date) {
+    const cleanTeam = (team || "").trim().toUpperCase();
     let pool = [];
+    let showAllMembers = false;
+
     if (cleanTeam.includes("SIII")) pool = membersData.filter(m => m.team === "SIII");
     else if (cleanTeam.includes("BIV")) pool = membersData.filter(m => m.team === "BIV");
     else if (cleanTeam === "I" || cleanTeam.includes("TEAM I")) pool = membersData.filter(m => m.team === "I");
-    else if (cleanTeam.includes("GEN7") || cleanTeam.includes("TRAINEE")) pool = membersData.filter(m => m.team === "GEN7");
-    else pool = [...membersData];
+    else if (cleanTeam.includes("TRAINEE")) pool = membersData.filter(m => m.team === "GEN7");
+    else if (cleanTeam.includes("MEMBERS")) {
+      pool = [...membersData];
+      showAllMembers = true;
+    } else {
+      pool = [...membersData];
+    }
 
     if (pool.length === 0) pool = [...membersData];
+
+    const isEmptyLineup = !lineupInput || lineupInput.trim() === "" || lineupInput.toLowerCase() === "kosong";
+    if (isEmptyLineup && !showAllMembers) return [];
+    if (showAllMembers && isEmptyLineup) return pool.map(m => ({ ...m, isCenter: false }));
 
     let lineup = [];
     let available = [...pool];
     let centerMember = null;
-    const targetCount = 16;
 
-    const names = lineupInput.split(",").map(n => n.trim());
-    for (let name of names) {
-      let isCenter = name.toUpperCase().includes("(C)") || name.toUpperCase().includes("(CENTER)");
-      let cleanName = name.replace(/\(C\)|\(CENTER\)/gi, "").trim();
-
-      let member = available.find(m => m.name.toLowerCase().includes(cleanName.toLowerCase()));
-      if (member) {
-        if (isCenter) {
-          centerMember = { ...member, isCenter: true };
-        } else {
-          lineup.push({ ...member, isCenter: false });
+    if (!isEmptyLineup) {
+      const names = lineupInput.split(",").map(n => n.trim());
+      for (let name of names) {
+        let isCenter = name.toUpperCase().includes("(C)") || name.toUpperCase().includes("(CENTER)");
+        let cleanName = name.replace(/\(C\)|\(CENTER\)/gi, "").trim();
+        let member = available.find(m => m.name.toLowerCase().includes(cleanName.toLowerCase()));
+        if (member) {
+          if (isCenter) centerMember = { ...member, isCenter: true };
+          else lineup.push({ ...member, isCenter: false });
+          available = available.filter(m => m.name !== member.name);
         }
-        available = available.filter(m => m.name !== member.name);
       }
     }
 
+    if (showAllMembers) {
+      available.forEach(m => lineup.push({ ...m, isCenter: false }));
+      return centerMember ? [centerMember, ...lineup] : lineup;
+    }
+
+    const targetCount = 16;
     const seedStr = `${eventName}-${date}-${cleanTeam}`;
     const seededRandom = createSeededRandom(seedStr);
 
@@ -159,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return centerMember ? [centerMember, ...lineup] : lineup;
   }
 
-  // ===== 3. FETCH & GROUP BY DATE =====
+  // ===== FETCH DATA =====
   function fetchSchedule() {
     Papa.parse(SHEET_URL, {
       download: true,
@@ -176,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
           lineupInput: row["Lineup"] || ""
         }));
 
-        // Group by date
         const groupMap = new Map();
         allEvents.forEach(event => {
           const key = event.date;
@@ -184,7 +255,6 @@ document.addEventListener("DOMContentLoaded", () => {
           groupMap.get(key).push(event);
         });
 
-        // Sort each group by time, then sort groups by date
         groupedData = Array.from(groupMap.entries()).map(([date, events]) => {
           events.sort((a, b) => {
             const timeA = a.time || "99:99";
@@ -194,8 +264,10 @@ document.addEventListener("DOMContentLoaded", () => {
           return { date, events };
         });
 
-        // Sort dates chronologically
         groupedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        populateYearFilter(groupedData);
+        setDefaultMonth(); // Set bulan sekarang sebagai default
 
         $("#loadingState").style.display = "none";
         renderSchedule();
@@ -207,18 +279,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== 4. RENDER GROUPED CARDS =====
+  // ===== RENDER SCHEDULE =====
   function renderSchedule() {
     const grid = $("#scheduleGrid");
     grid.innerHTML = "";
 
-    // Filter events inside each group
     const filteredGroups = groupedData.map(group => {
-      const filteredEvents = currentFilter === "ALL"
-        ? group.events
-        : group.events.filter(e => e.type.toLowerCase() === currentFilter.toLowerCase());
+      const parsed = parseDate(group.date);
+
+      const filteredEvents = group.events.filter(e => {
+        // 1. Filter Tipe
+        if (currentFilter !== "ALL") {
+          const type = (e.type || "").toLowerCase().trim();
+          const filter = currentFilter.toLowerCase().trim();
+          if (!(type === filter || type.includes(filter) || filter.includes(type))) return false;
+        }
+        // 2. Filter Tahun (Strict match, tidak ada "all")
+        if (parsed.year !== currentYearFilter) return false;
+        // 3. Filter Bulan (Strict match, tidak ada "all")
+        if (parsed.month !== currentMonthFilter) return false;
+        
+        return true;
+      });
+
       return { date: group.date, events: filteredEvents };
-    }).filter(group => group.events.length > 0); // Hide empty date groups
+    }).filter(group => group.events.length > 0);
 
     if (filteredGroups.length === 0) {
       $("#emptyState").style.display = "block";
@@ -228,7 +313,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filteredGroups.forEach((group, index) => {
       const card = document.createElement("div");
-      // Determine card type class based on events
       const types = [...new Set(group.events.map(e => e.type))];
       const cardTypeClass = types.length === 1 ? `type-${types[0]}` : "type-mixed";
       card.className = `schedule-card ${cardTypeClass} reveal`;
@@ -238,21 +322,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const day = dateParts[0] || "?";
       const month = dateParts[1] || "";
 
-      // Type badge
-      let typeBadgeHTML = "";
-      if (types.length === 1) {
-        typeBadgeHTML = `<span class="card-type">${types[0].toUpperCase()}</span>`;
-      } else {
-        typeBadgeHTML = `<span class="card-type multi">MULTI SHOW</span>`;
-      }
+      let typeBadgeHTML = types.length === 1 
+        ? `<span class="card-type">${types[0].toUpperCase()}</span>` 
+        : `<span class="card-type multi">MULTI SHOW</span>`;
 
-      // Event count indicator
       const eventCount = group.events.length;
-      const countBadge = eventCount > 1 
-        ? `<span class="event-count-badge">${eventCount} SHOWS</span>` 
-        : "";
+      const countBadge = eventCount > 1 ? `<span class="event-count-badge">${eventCount} SHOWS</span>` : "";
 
-      // Build events list HTML
       const eventsListHTML = group.events.map((event, idx) => {
         let lineupPreview = "TBA";
         if (event.lineupInput && event.lineupInput.trim() !== "") {
@@ -295,7 +371,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      // 3D Tilt on card
       if (finePointer && !reduceMotion) {
         card.addEventListener("pointermove", e => {
           const rect = card.getBoundingClientRect();
@@ -306,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
         card.addEventListener("pointerleave", () => { card.style.transform = ""; });
       }
 
-      // Click on individual event-item
       card.querySelectorAll(".event-item").forEach(item => {
         item.addEventListener("click", e => {
           e.stopPropagation();
@@ -325,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observeReveals();
   }
 
-  // ===== 5. MODAL LOGIC =====
+  // ===== MODAL LOGIC =====
   const modal = $("#scheduleModal");
   const modalClose = $("#modalClose");
   const modalBackdrop = $("#modalBackdrop");
@@ -346,6 +420,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lineup.length === 0) {
       lineupGrid.innerHTML = `<p style="grid-column: 1/-1; color: var(--muted); font-style: italic; text-align: center; padding: 20px;">Lineup akan diumumkan segera.</p>`;
     } else {
+      const cleanTeam = item.team.trim().toUpperCase();
+      const isAllMembersMode = cleanTeam.includes("MEMBERS");
+      
+      if (isAllMembersMode) lineupGrid.classList.add("all-members-mode");
+      else lineupGrid.classList.remove("all-members-mode");
+
       lineup.forEach(member => {
         const memberEl = document.createElement("div");
         memberEl.className = `lineup-member ${member.isCenter ? 'is-center' : ''}`;
@@ -388,7 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
   modalBackdrop.addEventListener("click", closeModal);
   document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("active")) closeModal(); });
 
-  // ===== 6. FILTER HANDLERS =====
+  // ===== FILTER HANDLERS =====
   $$(".filter-button").forEach(btn => {
     btn.addEventListener("click", () => {
       $$(".filter-button").forEach(b => b.classList.remove("is-selected"));
@@ -398,7 +478,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== 7. GLOBAL EFFECTS =====
+  const yearFilter = $("#yearFilter");
+  const monthFilter = $("#monthFilter");
+
+  if (yearFilter) {
+    yearFilter.addEventListener("change", () => {
+      currentYearFilter = yearFilter.value;
+      renderSchedule();
+    });
+  }
+
+  if (monthFilter) {
+    monthFilter.addEventListener("change", () => {
+      currentMonthFilter = monthFilter.value;
+      renderSchedule();
+    });
+  }
+
+  // ===== GLOBAL EFFECTS =====
   const glow = $("#cursorGlow");
   if (finePointer && !reduceMotion) {
     window.addEventListener("pointermove", e => {
@@ -439,7 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   createSparkleField();
 
-  // ===== 8. SCROLL REVEAL & BACK TO TOP =====
+  // ===== SCROLL REVEAL & BACK TO TOP =====
   function observeReveals() {
     const revealItems = $$(".reveal");
     if ("IntersectionObserver" in window) {
