@@ -6,80 +6,85 @@
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTXSO4F0RGtG62vXas3tz2Y5yuxK5v-4B9zvglhinBDq7IK-a-xZo2-ZMakdgOHwNM_ScpwpCa0bHs/pub?output=csv";
 
 const membersData = [
-  { name: "Radhiya Wira Sakti", team: "SIII", image: "Radhiya_SIII.png" },
-  { name: "Adrian Bagus Pramudya", team: "SIII", image: "Adrian_SIII.png" },
-  { name: "Akbar Firmansyah Putra Daryono", team: "SIII", image: "Akbar_SIII.png" },
-  { name: "Arief Rahman Hakim", team: "SIII", image: null },
-  { name: "Bima Satya Nugroho", team: "SIII", image: null },
-  { name: "Dimas Arya Putranto", team: "SIII", image: null },
-  { name: "Endang Suhendar", team: "SIII", image: "Endang_SIII.png" },
-  { name: "Ilman Arya Fathurrahman", team: "SIII", image: null },
-  { name: "Iqbal Nur Fathurrahman", team: "SIII", image: null },
-  { name: "Jendra Prasetyo Wibowo", team: "SIII", image: "Jendra_SIII.png" },
-  { name: "Julio Triwira Frediyanto", team: "SIII", image: "Julio_SIII.png" },
-  { name: "Kevin Alvaro Wijaya", team: "SIII", image: null },
-  { name: "Krisna Bayu Saputra", team: "SIII", image: null },
-  { name: "Miko Fajar Santoso", team: "SIII", image: null },
-  { name: "Muhammad Arkan Pradipta", team: "SIII", image: "Arkan_SIII.png" },
-  { name: "Rendy Prakoso Utama", team: "SIII", image: null },
-  { name: "Syafril Firman Syah", team: "SIII", image: "Syafril_SIII.png" },
-  { name: "Taufik Hidayat Nugroho", team: "SIII", image: "Taufik_SIII.png" },
-  { name: "Yudha Pramana Putra", team: "SIII", image: "Yudha_SIII.png" },
-  { name: "Muhammad Zaki Zulfikar", team: "BIV", image: "MZ_BIV.png" },
-  { name: "Bagas Mahendra Putra", team: "BIV", image: null },
-  { name: "Daffa Rizky Ramadhan", team: "BIV", image: null },
-  { name: "Dewa Guntur Saputra", team: "BIV", image: null },
-  { name: "Dion Arya Saputro", team: "BIV", image: null },
-  { name: "Evan Pratama Nugraha", team: "BIV", image: null },
-  { name: "Farhan Dzikri Ramadhan", team: "BIV", image: null },
-  { name: "Fikri Alwan Prasetyo", team: "BIV", image: null },
-  { name: "Galih Ginata Putra", team: "BIV", image: "Galih_BIV.png" },
-  { name: "Gerry Alvaro Santoso", team: "BIV", image: null },
-  { name: "Haidar Zainal Abidin", team: "BIV", image: null },
-  { name: "Irfan Kurniawan Putra", team: "BIV", image: null },
-  { name: "Khalid Naufal Hakim", team: "BIV", image: null },
-  { name: "Luthfi Arkan Prasetyo", team: "BIV", image: null },
-  { name: "Muhammad Ilham Setiawan", team: "BIV", image: null },
-  { name: "Rafiq Alamsyah Putra", team: "BIV", image: null },
-  { name: "Rizal Bagus Permana", team: "BIV", image: null },
-  { name: "Rizky Aditya Pratama", team: "BIV", image: "Rizky_BIV.png" },
-  { name: "Yoga Pratama Wicaksana", team: "BIV", image: null },
-  { name: "Yusuf Nabil Ardiansyah", team: "BIV", image: null },
-  { name: "Jaka Ginata Putra", team: "I", image: null },
-  { name: "Aditya Fauzan Nugraha", team: "I", image: "Aditya F_I.png" },
-  { name: "Aditya Prama Wicaksana", team: "I", image: "Aditya P_I.png" },
-  { name: "Ahmad Farel Ramadhan", team: "I", image: null },
-  { name: "Alvin Prakoso Wijanarko", team: "I", image: null },
-  { name: "Bayu Seto Pranata", team: "I", image: null },
-  { name: "Cahya Rizki Mahardika", team: "I", image: null },
-  { name: "Fathan Zaky Pratama", team: "I", image: null },
-  { name: "Gilang Surya Mahesa", team: "I", image: null },
-  { name: "Hafiz Reyhan Nugroho", team: "I", image: null },
-  { name: "Jonathan Rizal Pradana", team: "I", image: null },
-  { name: "M. Rafi Akmal Hidayat", team: "I", image: null },
-  { name: "Naufal Arya Prasetyo", team: "I", image: null },
-  { name: "Nico Andhika Saputra", team: "I", image: null },
-  { name: "Rama Dwi Kurniawan", team: "I", image: null },
-  { name: "Reza Maulana Hakim", team: "I", image: null },
-  { name: "Surya Adi Wicaksono", team: "I", image: null },
-  { name: "Syahrul Fikri Ananta", team: "I", image: null },
-  { name: "Zidan Farrel Alamsyah", team: "I", image: null },
-  { name: "Adnan Rizky Pramudya", team: "GEN7", image: null },
-  { name: "Aksa Bintang Mahesa", team: "GEN7", image: null },
-  { name: "Althaf Zidan Prakoso", team: "GEN7", image: null },
-  { name: "Bagus Arya Saputro", team: "GEN7", image: null },
-  { name: "Damar Fawwaz Nugroho", team: "GEN7", image: null },
-  { name: "Erlangga Putra Wicaksono", team: "GEN7", image: null },
-  { name: "Fauzan Nabil Ramadhan", team: "GEN7", image: null },
-  { name: "Gibran Alif Santosa", team: "GEN7", image: null },
-  { name: "Haris Dwi Pratama", team: "GEN7", image: null },
-  { name: "Iqbal Fathir Maulana", team: "GEN7", image: null },
-  { name: "Jovan Reynaldo Putra", team: "GEN7", image: null },
-  { name: "Kautsar Ilham Ardiansyah", team: "GEN7", image: null },
-  { name: "Mikael Bintang Saputra", team: "GEN7", image: null },
-  { name: "Rivan Prakoso Hidayat", team: "GEN7", image: null },
-  { name: "Tegar Putra Ramadhani", team: "GEN7", image: null },
-  { name: "Zaky Firdaus Nugraha", team: "GEN7", image: null }
+  // ===== TEAM SIII (25 Members) =====
+  { name: "Adnan Rizky Pramudya", team: "SIII", gen: 7, dob: "18 Jan 2011", mbti: "ENFP", height: "165 cm", blood: "O", horoscope: "Capricorn", ig: "@adnan.sbi48", x: "@adnan_sbi48", image: null, jiko: "Generasi baru, semangat baru! Adnan hadir untuk mengubah dunia!" },
+  { name: "Adrian Bagus Pramudya", team: "SIII", gen: 3, dob: "17 Agu 2007", mbti: "ISTP", height: "168 cm", blood: "B", horoscope: "Leo", ig: "@adrian.sbi48", x: "@adrian_sbi48", image: "Adrian_SIII.png", jiko: "Si perakit panggung yang tenang—tapi saat musik dimulai, lihat aku berubah!" },
+  { name: "Akbar Firmansyah Putra Daryono", team: "SIII", gen: 1, dob: "4 Jun 2005", mbti: "INFP", height: "174 cm", blood: "O", horoscope: "Gemini", ig: "@akbar.sbi48", x: "@akbar_sbi48", image: "Akbar_SIII.png", jiko: "Dari rumus kalkulus yang rumit, sampai detak jantung kalian yang berdegup cepat karena tarianku! Hallo Aku Akbar!" },
+  { name: "Aksa Bintang Mahesa", team: "SIII", gen: 7, dob: "7 Apr 2011", mbti: "ISTJ", height: "164 cm", blood: "A", horoscope: "Aries", ig: "@aksa.sbi48", x: "@aksa_sbi48", image: null, jiko: "Bintang yang siap melesat ke langit tertinggi! Aksa di sini!" },
+  { name: "Arief Rahman Hakim", team: "SIII", gen: 3, dob: "29 Okt 2006", mbti: "INTJ", height: "170 cm", blood: "A", horoscope: "Scorpio", ig: "@arief.sbi48", x: "@arief_sbi48", image: null, jiko: "Strategiku tajam, gerakanku lebih tajam lagi. Arief di sini, siap memimpin." },
+  { name: "Bima Satya Nugroho", team: "SIII", gen: 3, dob: "6 Feb 2007", mbti: "ESFJ", height: "173 cm", blood: "O", horoscope: "Aquarius", ig: "@bima.sbi48", x: "@bima_sbi48", image: null, jiko: "Teman terbaikmu di panggung! Ayo kita bersenang-senang bersama!" },
+  { name: "Damar Fawwaz Nugroho", team: "SIII", gen: 7, dob: "2 Feb 2012", mbti: "INFP", height: "160 cm", blood: "A", horoscope: "Aquarius", ig: "@damar.sbi48", x: "@damar_sbi48", image: null, jiko: "Cahaya kecil yang tak akan padam. Damar hadir untuk menerangi!" },
+  { name: "Dimas Arya Putranto", team: "SIII", gen: 3, dob: "21 Jun 2007", mbti: "INFP", height: "169 cm", blood: "A", horoscope: "Gemini", ig: "@dimas.sbi48", x: "@dimas_sbi48", image: null, jiko: "Puisi adalah bahasaku, panggung adalah puisiku. Selamat datang di duniaku." },
+  { name: "Endang Suhendar", team: "SIII", gen: 2, dob: "2 Mar 2005", mbti: "ESTJ", height: "174 cm", blood: "B", horoscope: "Pisces", ig: "@endang.sbi48", x: "@endang_sbi48", image: "Endang_SIII.png", jiko: "Disiplin adalah kunci, dan panggung adalah tugasku. Endang siap!" },
+  { name: "Fauzan Nabil Ramadhan", team: "SIII", gen: 7, dob: "28 Nov 2011", mbti: "ENFJ", height: "161 cm", blood: "O", horoscope: "Sagitarius", ig: "@fauzan.sbi48", x: "@fauzan_sbi48", image: null, jiko: "Energi positif yang selalu mengalir. Fauzan hadir untuk menginspirasi!" },
+  { name: "Haris Dwi Pratama", team: "SIII", gen: 7, dob: "6 Jan 2012", mbti: "ISFP", height: "159 cm", blood: "B", horoscope: "Capricorn", ig: "@haris.sbi48", x: "@haris_sbi48", image: null, jiko: "Seniman panggung dengan jiwa perasa. Haris hadir untuk menghibur." },
+  { name: "Ilman Arya Fathurrahman", team: "SIII", gen: 6, dob: "14 Sep 2009", mbti: "ISFJ", height: "165 cm", blood: "A", horoscope: "Virgo", ig: "@ilman.sbi48", x: "@ilman_sbi48", image: null, jiko: "Kecil tapi penuh perhatian—aku akan mengingat setiap wajah di antara kalian!" },
+  { name: "Iqbal Nur Fathurrahman", team: "SIII", gen: 4, dob: "25 Nov 2007", mbti: "INFJ", height: "171 cm", blood: "B", horoscope: "Sagitarius", ig: "@iqbal.sbi48", x: "@iqbal_sbi48", image: null, jiko: "Bijaksana di luar, penuh petualangan di dalam. Iqbal di sini untuk membawamu terbang!" },
+  { name: "Jendra Prasetyo Wibowo", team: "SIII", gen: 1, dob: "4 Jun 2005", mbti: "ENTJ", height: "174 cm", blood: "O", horoscope: "Gemini", ig: "@jendra.sbi48", x: "@jendra_sbi48", image: "Jendra_SIII.png", jiko: "Pemimpin alami, energi tak terbatas. Siapakah yang berani menantangku?" },
+  { name: "Julio Triwira Frediyanto", team: "SIII", gen: 2, dob: "8 Jul 2005", mbti: "ESFP", height: "173 cm", blood: "A", horoscope: "Cancer", ig: "@julio.sbi48", x: "@julio_sbi48", image: "Julio_SIII.png", jiko: "Senyumku adalah senjatuku, tarianku adalah bahasaku. Julio hadir untuk menghibur!" },
+  { name: "Kautsar Ilham Ardiansyah", team: "SIII", gen: 7, dob: "9 Jul 2012", mbti: "INFJ", height: "158 cm", blood: "B", horoscope: "Cancer", ig: "@kautsar.sbi48", x: "@kautsar_sbi48", image: null, jiko: "Permata tersembunyi di panggung. Siapakah yang akan menemukanku?" },
+  { name: "Kevin Alvaro Wijaya", team: "SIII", gen: 3, dob: "19 Apr 2007", mbti: "ISTJ", height: "170 cm", blood: "B", horoscope: "Aries", ig: "@kevin.sbi48", x: "@kevin_sbi48", image: null, jiko: "Detail adalah kekuatanku, panggung adalah kanvas sempurna. Saksikan karyaku." },
+  { name: "Krisna Bayu Saputra", team: "SIII", gen: 4, dob: "3 Jan 2008", mbti: "ENFJ", height: "168 cm", blood: "O", horoscope: "Capricorn", ig: "@krisna.sbi48", x: "@krisna_sbi48", image: null, jiko: "Energi hangat yang menerangi panggung. Krisna hadir untuk menginspirasi!" },
+  { name: "Miko Fajar Santoso", team: "SIII", gen: 3, dob: "27 Sep 2006", mbti: "ISFP", height: "172 cm", blood: "A", horoscope: "Libra", ig: "@miko.sbi48", x: "@miko_sbi48", image: null, jiko: "Seniman di atas panggung, penyair di balik layar. Selamat datang di galeriku." },
+  { name: "Muhammad Arkan Pradipta", team: "SIII", gen: 1, dob: "11 Des 2004", mbti: "ENFP", height: "174 cm", blood: "O", horoscope: "Sagitarius", ig: "@arkan.sbi48", x: "@arkan_sbi48", image: "Arkan_SIII.png", jiko: "Semangatku seperti api yang tak pernah padam! Ayo bakar panggung bersamaku!" },
+  { name: "Radhiya Wira Sakti", team: "SIII", gen: 1, dob: "12 Jan 2004", mbti: "ENFP", height: "174 cm", blood: "A", horoscope: "Capricorn", ig: "@radhiya.sbi48", x: "@radhiya_sbi48", image: "Radhiya_SIII.png", jiko: "Dari sudut Purwokerto, aku datang membawa badai energi! Siap untuk terpesona?" },
+  { name: "Rendy Prakoso Utama", team: "SIII", gen: 3, dob: "15 Mei 2007", mbti: "INTP", height: "171 cm", blood: "B", horoscope: "Taurus", ig: "@rendy.sbi48", x: "@rendy_sbi48", image: null, jiko: "Logikaku tajam, kreasiku lebih tajam. Rendy, si pemikir yang menari!" },
+  { name: "Syafril Firman Syah", team: "SIII", gen: 1, dob: "1 Mei 2004", mbti: "ESTP", height: "175 cm", blood: "A", horoscope: "Taurus", ig: "@syafril.sbi48", x: "@syafril_sbi48", image: "Syafril_SIII.png", jiko: "Petualang panggung, penakluk hati. Siapa yang berani menemani perjalananku?" },
+  { name: "Taufik Hidayat Nugroho", team: "SIII", gen: 1, dob: "23 Apr 2003", mbti: "ISTJ", height: "176 cm", blood: "O", horoscope: "Taurus", ig: "@taufik.sbi48", x: "@taufik_sbi48", image: "Taufik_SIII.png", jiko: "Konsisten, tulus, selalu siap. Taufik di sini untuk memberikan yang terbaik!" },
+  { name: "Yudha Pramana Putra", team: "SIII", gen: 1, dob: "9 Okt 2004", mbti: "ENFJ", height: "173 cm", blood: "B", horoscope: "Libra", ig: "@yudha.sbi48", x: "@yudha_sbi48", image: "Yudha_SIII.png", jiko: "Energi positif untuk semua yang kusayangi. Mari kita ciptakan momen indah!" },
+
+  // ===== TEAM BIV (24 Members) =====
+  { name: "Althaf Zidan Prakoso", team: "BIV", gen: 7, dob: "25 Jun 2011", mbti: "ENTP", height: "163 cm", blood: "B", horoscope: "Cancer", ig: "@althaf.sbi48", x: "@althaf_sbi48", image: null, jiko: "Penantang kecil dengan mimpi raksasa. Siapakah yang berani menantangku?" },
+  { name: "Bagas Mahendra Putra", team: "BIV", gen: 4, dob: "7 Feb 2008", mbti: "ISFJ", height: "169 cm", blood: "A", horoscope: "Aquarius", ig: "@bagas.sbi48", x: "@bagas_sbi48", image: null, jiko: "Langkahku ringan, tapi kesan yang kutinggalkan berat di hatimu." },
+  { name: "Bagus Arya Saputro", team: "BIV", gen: 7, dob: "13 Sep 2011", mbti: "ISFJ", height: "162 cm", blood: "O", horoscope: "Virgo", ig: "@bagus.sbi48", x: "@bagus_sbi48", image: null, jiko: "Kebaikan adalah namaku, panggung adalah rumahku. Bagus hadir!" },
+  { name: "Daffa Rizky Ramadhan", team: "BIV", gen: 4, dob: "18 Jul 2008", mbti: "ENFP", height: "170 cm", blood: "O", horoscope: "Cancer", ig: "@daffa.sbi48", x: "@daffa_sbi48", image: null, jiko: "Bintang muda yang siap bersinar lebih terang dari matahari!" },
+  { name: "Dewa Guntur Saputra", team: "BIV", gen: 6, dob: "23 Mar 2010", mbti: "INFP", height: "165 cm", blood: "B", horoscope: "Aries", ig: "@dewa.sbi48", x: "@dewa_sbi48", image: null, jiko: "Imajinasi adalah senjata terkuatku, dan panggung adalah medanku." },
+  { name: "Dion Arya Saputro", team: "BIV", gen: 5, dob: "9 Nov 2009", mbti: "ENTP", height: "167 cm", blood: "A", horoscope: "Scorpio", ig: "@dion.sbi48", x: "@dion_sbi48", image: null, jiko: "Penantang, pencipta, pencuri hatimu. Siapa berani berdebat denganku?" },
+  { name: "Erlangga Putra Wicaksono", team: "BIV", gen: 7, dob: "19 Mei 2011", mbti: "ESTJ", height: "164 cm", blood: "B", horoscope: "Taurus", ig: "@erlangga.sbi48", x: "@erlangga_sbi48", image: null, jiko: "Disiplin adalah jalan menuju bintang. Erlangga siap menanjak!" },
+  { name: "Evan Pratama Nugraha", team: "BIV", gen: 6, dob: "16 Jan 2010", mbti: "ESFJ", height: "166 cm", blood: "O", horoscope: "Capricorn", ig: "@evan.sbi48", x: "@evan_sbi48", image: null, jiko: "Kehangatan yang tak pernah kau duga. Evan siap menjadi sahabatmu!" },
+  { name: "Farhan Dzikri Ramadhan", team: "BIV", gen: 6, dob: "28 Mei 2010", mbti: "ISTP", height: "164 cm", blood: "B", horoscope: "Gemini", ig: "@farhan.sbi48", x: "@farhan_sbi48", image: null, jiko: "Si kecil lincah yang selalu mengejutkan! Jangan kedip, atau kau akan melewatkanku!" },
+  { name: "Fikri Alwan Prasetyo", team: "BIV", gen: 4, dob: "12 Okt 2008", mbti: "INTJ", height: "171 cm", blood: "A", horoscope: "Libra", ig: "@fikri.sbi48", x: "@fikri_sbi48", image: null, jiko: "Cerdas di atas panggung, bijak di luar. Fikri hadir untuk memukau!" },
+  { name: "Galih Ginata Putra", team: "BIV", gen: 3, dob: "26 Mei 2007", mbti: "ENFJ", height: "173 cm", blood: "O", horoscope: "Gemini", ig: "@galih.sbi48", x: "@galih_sbi48", image: "Galih_BIV.png", jiko: "Energi yang mengalir dari dalam, untuk menghidupkan panggung kita!" },
+  { name: "Gerry Alvaro Santoso", team: "BIV", gen: 6, dob: "5 Agu 2010", mbti: "ISFP", height: "165 cm", blood: "B", horoscope: "Leo", ig: "@gerry.sbi48", x: "@gerry_sbi48", image: null, jiko: "Seniman panggung dengan jiwa perasa. Selamat datang di karyaku." },
+  { name: "Haidar Zainal Abidin", team: "BIV", gen: 4, dob: "30 Apr 2008", mbti: "ESTJ", height: "170 cm", blood: "A", horoscope: "Taurus", ig: "@haidar.sbi48", x: "@haidar_sbi48", image: null, jiko: "Disiplin adalah jalan menuju panggung sempurna. Haidar siap memimpin!" },
+  { name: "Irfan Kurniawan Putra", team: "BIV", gen: 5, dob: "22 Feb 2009", mbti: "INFJ", height: "168 cm", blood: "O", horoscope: "Pisces", ig: "@irfan.sbi48", x: "@irfan_sbi48", image: null, jiko: "Tenang seperti danau, dalam seperti samudra. Irfan hadir untuk menyentuh hatimu." },
+  { name: "Jovan Reynaldo Putra", team: "BIV", gen: 7, dob: "15 Okt 2011", mbti: "ESFP", height: "161 cm", blood: "A", horoscope: "Libra", ig: "@jovan.sbi48", x: "@jovan_sbi48", image: null, jiko: "Bintang muda yang bersinar terang! Jovan hadir untuk menyilaukan!" },
+  { name: "Khalid Naufal Hakim", team: "BIV", gen: 6, dob: "11 Sep 2010", mbti: "ENTJ", height: "166 cm", blood: "B", horoscope: "Virgo", ig: "@khalid.sbi48", x: "@khalid_sbi48", image: null, jiko: "Pemimpin masa depan, hari ini. Siapakah yang akan mengikutiku?" },
+  { name: "Luthfi Arkan Prasetyo", team: "BIV", gen: 6, dob: "3 Des 2010", mbti: "ENFP", height: "164 cm", blood: "A", horoscope: "Sagitarius", ig: "@luthfi.sbi48", x: "@luthfi_sbi48", image: null, jiko: "Petualang kecil dengan mimpi raksasa. Ayo terbang bersamaku!" },
+  { name: "Muhammad Ilham Setiawan", team: "BIV", gen: 4, dob: "14 Jun 2008", mbti: "ISTJ", height: "171 cm", blood: "O", horoscope: "Gemini", ig: "@ilham.sbi48", x: "@ilham_sbi48", image: null, jiko: "Konsisten, tulus, penuh kejutan. Ilham siap untukmu!" },
+  { name: "Muhammad Zaki Zulfikar", team: "BIV", gen: 2, dob: "18 Mei 2005", mbti: "ESFP", height: "174 cm", blood: "B", horoscope: "Taurus", ig: "@zaki.sbi48", x: "@zaki_sbi48", image: "MZ_BIV.png", jiko: "Energi murni yang tak pernah padam. Zaki hadir untuk menggebrak!" },
+  { name: "Rafiq Alamsyah Putra", team: "BIV", gen: 4, dob: "26 Sep 2008", mbti: "INFP", height: "169 cm", blood: "A", horoscope: "Libra", ig: "@rafiq.sbi48", x: "@rafiq_sbi48", image: null, jiko: "Pemimpi dengan pena di tangan. Selamat datang di puisiku." },
+  { name: "Rizal Bagus Permana", team: "BIV", gen: 6, dob: "8 Apr 2010", mbti: "INTP", height: "165 cm", blood: "O", horoscope: "Aries", ig: "@rizal.sbi48", x: "@rizal_sbi48", image: null, jiko: "Analis panggung, penghibur sejati. Rizal hadir untuk membuatmu tertawa!" },
+  { name: "Rizky Aditya Pratama", team: "BIV", gen: 1, dob: "17 Nov 2004", mbti: "ENTP", height: "175 cm", blood: "B", horoscope: "Scorpio", ig: "@rizky.sbi48", x: "@rizky_sbi48", image: "Rizky_BIV.png", jiko: "Energi dan karisma dalam satu paket. Siapa yang bisa menandingiku?" },
+  { name: "Rivan Prakoso Hidayat", team: "BIV", gen: 7, dob: "3 Des 2011", mbti: "ISTP", height: "160 cm", blood: "A", horoscope: "Sagitarius", ig: "@rivan.sbi48", x: "@rivan_sbi48", image: null, jiko: "Energi murni yang tak pernah berhenti. Rivan hadir untuk bergerak!" },
+  { name: "Yoga Pratama Wicaksana", team: "BIV", gen: 3, dob: "31 Jan 2007", mbti: "ISFJ", height: "172 cm", blood: "A", horoscope: "Aquarius", ig: "@yoga.sbi48", x: "@yoga_sbi48", image: null, jiko: "Penjaga rahasia, penghibur hati. Yoga hadir untukmu." },
+  { name: "Yusuf Nabil Ardiansyah", team: "BIV", gen: 4, dob: "20 Agu 2008", mbti: "ENFJ", height: "170 cm", blood: "O", horoscope: "Leo", ig: "@yusuf.sbi48", x: "@yusuf_sbi48", image: null, jiko: "Cahaya yang menerangi panggung. Yusuf hadir untuk bersinar!" },
+
+  // ===== TEAM I (23 Members) =====
+  { name: "Aditya Fauzan Nugraha", team: "I", gen: 4, dob: "17 Sep 2009", mbti: "ISTP", height: "168 cm", blood: "O", horoscope: "Virgo", ig: "@aditf.sbi48", x: "@aditf_sbi48", image: "Aditya F_I.png", jiko: "Teknisi panggung, pencipta keajaiban. Siap untuk melihatku bekerja?" },
+  { name: "Aditya Prama Wicaksana", team: "I", gen: 6, dob: "6 Jan 2010", mbti: "INFP", height: "166 cm", blood: "B", horoscope: "Capricorn", ig: "@adityap.sbi48", x: "@adityap_sbi48", image: "Aditya P_I.png", jiko: "Pemimpi di balik senyum. Aditya hadir untuk membawamu ke dunia khayalku." },
+  { name: "Ahmad Farel Ramadhan", team: "I", gen: 5, dob: "24 Apr 2009", mbti: "ENTJ", height: "170 cm", blood: "A", horoscope: "Taurus", ig: "@farel.sbi48", x: "@farel_sbi48", image: null, jiko: "Pemimpin alami dengan tatapan tajam. Farel hadir untuk menaklukkan!" },
+  { name: "Alvin Prakoso Wijanarko", team: "I", gen: 5, dob: "13 Okt 2009", mbti: "ISFJ", height: "169 cm", blood: "O", horoscope: "Libra", ig: "@alvin.sbi48", x: "@alvin_sbi48", image: null, jiko: "Teman yang selalu ada saat kau butuh. Alvin siap menjadi sahabatmu." },
+  { name: "Bayu Seto Pranata", team: "I", gen: 6, dob: "18 Feb 2010", mbti: "ESFP", height: "167 cm", blood: "B", horoscope: "Aquarius", ig: "@bayu.sbi48", x: "@bayu_sbi48", image: null, jiko: "Energi muda yang tak terbendung! Bayu hadir untuk membawamu terbang!" },
+  { name: "Cahya Rizki Mahardika", team: "I", gen: 6, dob: "29 Jun 2010", mbti: "ENFJ", height: "165 cm", blood: "A", horoscope: "Cancer", ig: "@cahya.sbi48", x: "@cahya_sbi48", image: null, jiko: "Cahaya yang menerangi panggung. Cahya hadir untuk menerangi harimu!" },
+  { name: "Fathan Zaky Pratama", team: "I", gen: 5, dob: "7 Mar 2009", mbti: "INTP", height: "171 cm", blood: "O", horoscope: "Pisces", ig: "@fathan.sbi48", x: "@fathan_sbi48", image: null, jiko: "Logika di atas panggung, keajaiban di hati. Fathan hadir untuk memukau!" },
+  { name: "Gilang Surya Mahesa", team: "I", gen: 5, dob: "21 Jul 2009", mbti: "ESTP", height: "172 cm", blood: "B", horoscope: "Cancer", ig: "@gilang.sbi48", x: "@gilang_sbi48", image: null, jiko: "Petualang panggung, penakluk hati. Gilang hadir untuk petualangan!" },
+  { name: "Gibran Alif Santosa", team: "I", gen: 7, dob: "11 Agu 2011", mbti: "INTJ", height: "163 cm", blood: "A", horoscope: "Leo", ig: "@gibran.sbi48", x: "@gibran_sbi48", image: null, jiko: "Cerdas di luar, manis di dalam. Gibran hadir untuk membuatmu penasaran!" },
+  { name: "Hafiz Reyhan Nugroho", team: "I", gen: 5, dob: "2 Des 2009", mbti: "INFJ", height: "168 cm", blood: "A", horoscope: "Sagitarius", ig: "@hafiz.sbi48", x: "@hafiz_sbi48", image: null, jiko: "Pengingat setia di panggungmu. Hafiz hadir untuk menemani perjalanan." },
+  { name: "Iqbal Fathir Maulana", team: "I", gen: 7, dob: "22 Mar 2011", mbti: "ENTP", height: "162 cm", blood: "O", horoscope: "Aries", ig: "@iqbalf.sbi48", x: "@iqbalf_sbi48", image: null, jiko: "Penantang yang selalu siap. Iqbal Fathir hadir untuk mengejutkan!" },
+  { name: "Jaka Ginata Putra", team: "I", gen: 2, dob: "4 Jul 2005", mbti: "ENFP", height: "173 cm", blood: "A", horoscope: "Cancer", ig: "@jaka.sbi48", x: "@jaka_sbi48", image: null, jiko: "Semangatku seperti ombak—tak terduga, tapi selalu menyentuh pantai hatimu." },
+  { name: "Jonathan Rizal Pradana", team: "I", gen: 5, dob: "16 Mei 2009", mbti: "ENTP", height: "170 cm", blood: "O", horoscope: "Taurus", ig: "@jonathan.sbi48", x: "@jonathan_sbi48", image: null, jiko: "Kreatif, cerdas, dan selalu mengejutkan. Jonathan hadir untuk membuatmu terpesona!" },
+  { name: "M. Rafi Akmal Hidayat", team: "I", gen: 5, dob: "27 Agu 2009", mbti: "ISFP", height: "169 cm", blood: "B", horoscope: "Virgo", ig: "@rafi.sbi48", x: "@rafi_sbi48", image: null, jiko: "Seniman yang melukis dengan gerakan. Selamat datang di galeriku." },
+  { name: "Mikael Bintang Saputra", team: "I", gen: 7, dob: "27 Apr 2011", mbti: "ENFP", height: "163 cm", blood: "O", horoscope: "Taurus", ig: "@mikael.sbi48", x: "@mikael_sbi48", image: null, jiko: "Bintang yang siap bersinar. Mikael hadir untuk bersinar terang!" },
+  { name: "Naufal Arya Prasetyo", team: "I", gen: 2, dob: "10 Nov 2005", mbti: "ISTJ", height: "174 cm", blood: "A", horoscope: "Scorpio", ig: "@naufal.sbi48", x: "@naufal_sbi48", image: null, jiko: "Disiplin adalah kunci, panggung adalah rumah. Naufal siap!" },
+  { name: "Nico Andhika Saputra", team: "I", gen: 5, dob: "4 Feb 2009", mbti: "ENFP", height: "168 cm", blood: "O", horoscope: "Aquarius", ig: "@nico.sbi48", x: "@nico_sbi48", image: null, jiko: "Semangatku meledak seperti kembang api! Nico hadir untuk merayakan!" },
+  { name: "Rama Dwi Kurniawan", team: "I", gen: 2, dob: "22 Sep 2005", mbti: "INTJ", height: "173 cm", blood: "B", horoscope: "Virgo", ig: "@rama.sbi48", x: "@rama_sbi48", image: null, jiko: "Pemikir yang selalu selangkah di depan. Rama hadir untuk memimpin." },
+  { name: "Reza Maulana Hakim", team: "I", gen: 2, dob: "15 Des 2005", mbti: "ESFJ", height: "171 cm", blood: "A", horoscope: "Sagitarius", ig: "@reza.sbi48", x: "@reza_sbi48", image: null, jiko: "Kehangatan yang tak pernah kau duga. Reza hadir untukmu!" },
+  { name: "Surya Adi Wicaksono", team: "I", gen: 2, dob: "9 Apr 2006", mbti: "ENFJ", height: "172 cm", blood: "O", horoscope: "Aries", ig: "@surya.sbi48", x: "@surya_sbi48", image: null, jiko: "Cahaya yang menerangi panggung. Surya hadir untuk bersinar!" },
+  { name: "Syahrul Fikri Ananta", team: "I", gen: 6, dob: "12 Jul 2010", mbti: "ISTP", height: "166 cm", blood: "B", horoscope: "Cancer", ig: "@syahrul.sbi48", x: "@syahrul_sbi48", image: null, jiko: "Si kecil lincah yang selalu mengejutkan. Syahrul hadir untukmu!" },
+  { name: "Tegar Putra Ramadhani", team: "I", gen: 7, dob: "16 Feb 2012", mbti: "INTJ", height: "159 cm", blood: "B", horoscope: "Aquarius", ig: "@tegar.sbi48", x: "@tegar_sbi48", image: null, jiko: "Tegar di luar, lembut di dalam. Tegar hadir untuk menyentuh hatimu." },
+  { name: "Zaky Firdaus Nugraha", team: "I", gen: 7, dob: "30 Sep 2012", mbti: "ISFJ", height: "158 cm", blood: "O", horoscope: "Libra", ig: "@zaky.sbi48", x: "@zaky_sbi48", image: null, jiko: "Kebaikan yang tak pernah pudar. Zaky hadir untukmu!" },
+  { name: "Zidan Farrel Alamsyah", team: "I", gen: 5, dob: "30 Okt 2009", mbti: "INFP", height: "167 cm", blood: "A", horoscope: "Scorpio", ig: "@zidan.sbi48", x: "@zidan_sbi48", image: null, jiko: "Pemimpi dengan hati penuh cerita. Zidan hadir untuk berbagi." }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -93,11 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== AUTO-DETECT CURRENT DATE =====
   const now = new Date();
   const currentYear = now.getFullYear().toString();
-  const currentMonth = (now.getMonth() + 1).toString().padStart(2, '0'); // "01" to "12"
+  const currentMonth = (now.getMonth() + 1).toString().padStart(2, '0');
 
   let currentFilter = "ALL";
-  let currentYearFilter = currentYear;   // Default ke tahun sekarang
-  let currentMonthFilter = currentMonth; // Default ke bulan sekarang
+  let currentYearFilter = currentYear;
+  let currentMonthFilter = currentMonth;
   let groupedData = [];
 
   // ===== HELPER: Parse Date =====
@@ -147,18 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (parsed.year !== "0000") years.add(parsed.year);
     });
 
-    // Pastikan tahun sekarang selalu ada di daftar, meski belum ada event
     years.add(currentYear);
+    const sortedYears = Array.from(years).sort();
 
-    const sortedYears = Array.from(years).sort(); // Urut dari terlama ke terbaru
-
-    yearSelect.innerHTML = ''; // Kosongkan dulu
+    yearSelect.innerHTML = '';
     sortedYears.forEach(year => {
       const option = document.createElement("option");
       option.value = year;
       option.textContent = year;
       if (year === currentYear) {
-        option.selected = true; // Set default ke tahun sekarang
+        option.selected = true;
       }
       yearSelect.appendChild(option);
     });
@@ -168,17 +171,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function setDefaultMonth() {
     const monthSelect = $("#monthFilter");
     if (monthSelect) {
-      monthSelect.value = currentMonth; // Set default ke bulan sekarang
+      monthSelect.value = currentMonth;
     }
   }
 
-  // ===== LINEUP GENERATOR (DENGAN FITUR EXCLUDE) =====
+  // ===== LINEUP GENERATOR =====
   function generateLineup(lineupInput, team, eventName, date) {
     const cleanTeam = (team || "").trim().toUpperCase();
     let pool = [];
     let showAllMembers = false;
 
-    // 1. Tentukan pool berdasarkan Tim
     if (cleanTeam.includes("SIII")) pool = membersData.filter(m => m.team === "SIII");
     else if (cleanTeam.includes("BIV")) pool = membersData.filter(m => m.team === "BIV");
     else if (cleanTeam === "I" || cleanTeam.includes("TEAM I")) pool = membersData.filter(m => m.team === "I");
@@ -192,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pool.length === 0) pool = [...membersData];
 
-    // 2. Cek jika lineup kosong
     const isEmptyLineup = !lineupInput || lineupInput.trim() === "" || lineupInput.toLowerCase() === "kosong";
     if (isEmptyLineup && !showAllMembers) return [];
     if (showAllMembers && isEmptyLineup) return pool.map(m => ({ ...m, isCenter: false }));
@@ -201,24 +202,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let available = [...pool];
     let centerMember = null;
 
-    // 3. Proses Input Lineup (Termasuk Exclude)
     if (!isEmptyLineup) {
       const names = lineupInput.split(",").map(n => n.trim());
       
       for (let name of names) {
-        // A. Cek apakah ini perintah EXCLUDE (diawali tanda '-' atau kata 'exclude')
         if (name.startsWith("-") || name.toLowerCase().startsWith("exclude ")) {
           let cleanExcludeName = name.replace(/^[-\s]+|exclude\s+/gi, "").trim();
           let memberToExclude = pool.find(m => m.name.toLowerCase().includes(cleanExcludeName.toLowerCase()));
           
           if (memberToExclude) {
-            // Hapus dari pool acak agar tidak terpilih
             available = available.filter(m => m.name !== memberToExclude.name);
           }
-          continue; // Lanjut ke nama berikutnya
+          continue;
         }
 
-        // B. Cek apakah ini CENTER
         let isCenter = name.toUpperCase().includes("(C)") || name.toUpperCase().includes("(CENTER)");
         let cleanName = name.replace(/\(C\)|\(CENTER\)/gi, "").trim();
 
@@ -229,13 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             lineup.push({ ...member, isCenter: false });
           }
-          // Hapus dari available agar tidak teracak ulang
           available = available.filter(m => m.name !== member.name);
         }
       }
     }
 
-    // 4. Jika mode "SBI48 Members" → tambahkan SEMUA sisa member
     if (showAllMembers) {
       available.forEach(m => {
         lineup.push({ ...m, isCenter: false });
@@ -243,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return centerMember ? [centerMember, ...lineup] : lineup;
     }
 
-    // 5. Mode Normal: Acak hingga 16 member (Deterministik / Anti-Refresh)
     const targetCount = 16;
     const seedStr = `${eventName}-${date}-${cleanTeam}`;
     const seededRandom = createSeededRandom(seedStr);
@@ -293,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
         groupedData.sort((a, b) => new Date(a.date) - new Date(b.date));
         
         populateYearFilter(groupedData);
-        setDefaultMonth(); // Set bulan sekarang sebagai default
+        setDefaultMonth();
 
         $("#loadingState").style.display = "none";
         renderSchedule();
@@ -314,15 +308,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const parsed = parseDate(group.date);
 
       const filteredEvents = group.events.filter(e => {
-        // 1. Filter Tipe
         if (currentFilter !== "ALL") {
           const type = (e.type || "").toLowerCase().trim();
           const filter = currentFilter.toLowerCase().trim();
           if (!(type === filter || type.includes(filter) || filter.includes(type))) return false;
         }
-        // 2. Filter Tahun (Strict match, tidak ada "all")
         if (parsed.year !== currentYearFilter) return false;
-        // 3. Filter Bulan (Strict match, tidak ada "all")
         if (parsed.month !== currentMonthFilter) return false;
         
         return true;
@@ -356,20 +347,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const countBadge = eventCount > 1 ? `<span class="event-count-badge">${eventCount} SHOWS</span>` : "";
 
       const eventsListHTML = group.events.map((event, idx) => {
-  return `
-    <div class="event-item" data-event-index="${idx}" data-date="${group.date}">
-      <div class="event-time">${event.time || "--:--"}</div>
-      <div class="event-details">
-        <h4 class="event-name">${event.eventName}</h4>
-        <div class="event-meta">
-          <span>📍 ${event.location}</span>
-          <span>👥 ${event.team}</span>
-        </div>
-      </div>
-      <span class="event-arrow">→</span>
-    </div>
-  `;
-}).join("");
+        return `
+          <div class="event-item" data-event-index="${idx}" data-date="${group.date}">
+            <div class="event-time">${event.time || "--:--"}</div>
+            <div class="event-details">
+              <h4 class="event-name">${event.eventName}</h4>
+              <div class="event-meta">
+                <span>📍 ${event.location}</span>
+                <span>👥 ${event.team}</span>
+              </div>
+            </div>
+            <span class="event-arrow">→</span>
+          </div>
+        `;
+      }).join("");
 
       card.innerHTML = `
         <div class="card-header">
@@ -411,6 +402,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     observeReveals();
+  }
+
+  // ===== MOBILE MENU HANDLER =====
+  const menuButton = $("#menuButton");
+  const nav = $("#siteNav");
+  
+  function closeMenu() {
+    if (!menuButton || !nav) return;
+    menuButton.setAttribute("aria-expanded", "false");
+    nav.classList.remove("open");
+    document.body.classList.remove("menu-open");
+  }
+  
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      nav.classList.toggle("open", !isOpen);
+      document.body.classList.toggle("menu-open", !isOpen);
+    });
+    
+    // Close menu when clicking on nav links
+    $$("a", nav).forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!nav.contains(e.target) && !menuButton.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    
+    // Close menu on ESC key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
   }
 
   // ===== MODAL LOGIC =====
