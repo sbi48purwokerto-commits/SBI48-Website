@@ -60,7 +60,7 @@ const membersData = [
   { name: "Yusuf Nabil Ardiansyah", team: "BIV", gen: 4, dob: "20 Agu 2008", mbti: "ENFJ", height: "170 cm", blood: "O", horoscope: "Leo", ig: "@yusuf.sbi48", x: "@yusuf_sbi48", image: null, jiko: "Cahaya yang menerangi panggung. Yusuf hadir untuk bersinar!" },
 
   // ===== TEAM I (23 Members) =====
-  { name: "Aditya Fauzan Nugraha", team: "I", gen: 4, dob: "17 Sep 2009", mbti: "ISTP", height: "170 cm", blood: "O", horoscope: "Virgo", ig: "@aditf.sbi48", x: "@aditf_sbi48", image: "Aditya F_I.png", jiko: "Teknisi panggung, pencipta keajaiban. Siap untuk melihatku bekerja?" },
+  { name: "Aditya Fauzan Nugraha", team: "I", gen: 4, dob: "17 Sep 2009", mbti: "ISTP", height: "173 cm", blood: "O", horoscope: "Virgo", ig: "@aditf.sbi48", x: "@aditf_sbi48", image: "Aditya F_I.png", jiko: "Teknisi panggung, pencipta keajaiban. Siap untuk melihatku bekerja?" },
   { name: "Aditya Prama Wicaksana", team: "I", gen: 6, dob: "6 Jan 2010", mbti: "INFP", height: "166 cm", blood: "B", horoscope: "Capricorn", ig: "@adityap.sbi48", x: "@adityap_sbi48", image: "Aditya P_I.png", jiko: "Pemimpi di balik senyum. Aditya hadir untuk membawamu ke dunia khayalku." },
   { name: "Ahmad Farel Ramadhan", team: "I", gen: 5, dob: "24 Apr 2009", mbti: "ENTJ", height: "170 cm", blood: "A", horoscope: "Taurus", ig: "@farel.sbi48", x: "@farel_sbi48", image: null, jiko: "Pemimpin alami dengan tatapan tajam. Farel hadir untuk menaklukkan!" },
   { name: "Alvin Prakoso Wijanarko", team: "I", gen: 5, dob: "13 Okt 2009", mbti: "ISFJ", height: "169 cm", blood: "O", horoscope: "Libra", ig: "@alvin.sbi48", x: "@alvin_sbi48", image: null, jiko: "Teman yang selalu ada saat kau butuh. Alvin siap menjadi sahabatmu." },
